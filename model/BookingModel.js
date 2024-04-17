@@ -20,6 +20,13 @@ const BookingSchema = Schema(
     space: { type: String },
     mobile: { type: String },
     name: { type: String },
+    full_name: { type: String },
+    job_title: { type: String },
+    annual_turnover: { type: String },
+    sector: [String],
+    personalised: { type: Boolean },
+    square_meters: { type: String },
+    personal_meters: { type: String },
     payment: {
       type: Object,
       ref: 'BookingPayment',

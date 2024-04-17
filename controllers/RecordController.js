@@ -81,6 +81,12 @@ module.exports.post = async (req, res) => {
     export_morocco,
     meeting_sectors,
     image_url,
+    full_name,
+    ministry,
+    governmental,
+    annual_turnover,
+    designation,
+    cin,
   } = req.body;
 
   try {
@@ -99,6 +105,12 @@ module.exports.post = async (req, res) => {
       image_url,
       payment: undefined,
       date_created: new Date(),
+      full_name,
+      ministry,
+      governmental,
+      annual_turnover,
+      designation,
+      cin,
     });
 
     // Retrieve the inserted document's _id
@@ -444,7 +456,20 @@ module.exports.verifyGeneratedToken = async function (req, res) {
 
 // INIITIALISE TRANSACTION FOR BOOKING
 module.exports.createBooking = async function (req, res) {
-  const { method, name, email, space, mobile } = req.body;
+  const {
+    method,
+    name,
+    email,
+    space,
+    mobile,
+    full_name,
+    job_title,
+    annual_turnover,
+    sector,
+    personalised,
+    square_meters,
+    personal_meters,
+  } = req.body;
   try {
     const uniqueRef = generateTransactionRef() + 'BOOKING';
 
@@ -463,6 +488,13 @@ module.exports.createBooking = async function (req, res) {
       name,
       email,
       payment: data,
+      full_name,
+      personal_meters,
+      job_title,
+      annual_turnover,
+      sector,
+      personalised,
+      square_meters,
     });
     const insertedId = result.insertedId;
     res.status(200).json({
@@ -556,8 +588,3 @@ module.exports.verifyBooking = async function (req, res) {
     res.status(500).json({ error: 'Error updating record' });
   }
 };
-
-
-
-
-
