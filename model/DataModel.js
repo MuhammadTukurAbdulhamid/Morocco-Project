@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const PaymentSchema = Schema({
   method: {
     type: String,
-    enum: ['PAYSTACK', 'CODE'],
+    enum: ["PAYSTACK", "CODE"],
   },
   status: {
     type: String,
-    enum: ['PENDING', 'SUCCESS', 'FAILED'],
+    enum: ["PENDING", "SUCCESS", "FAILED"],
   },
   date: { type: Date },
   reference: { type: String },
@@ -29,22 +29,27 @@ const RecordSchema = Schema(
     image_url: { type: String },
     qr_data: { type: String, default: undefined },
     date_created: { type: Date },
-    full_name: { type: String },
+    first_name: { type: String },
+    last_name: { type: String },
     ministry: { type: String },
     governmental: { type: Boolean },
     annual_turnover: { type: String },
     designation: { type: String },
     cin: { type: String },
+    cin_expiry: { type: Date },
+    passport_number: { type: String },
+    passport_expiry: { type: Date },
+    cities: { type: [String] },
     payment: {
       type: Object,
-      ref: 'Payment',
+      ref: "Payment",
       default: undefined,
     },
   },
   { timestamps: true }
 );
-const Payment = mongoose.model('Payment', PaymentSchema);
-const Record = mongoose.model('record', RecordSchema);
+const Payment = mongoose.model("Payment", PaymentSchema);
+const Record = mongoose.model("record", RecordSchema);
 
 module.exports = {
   Payment,

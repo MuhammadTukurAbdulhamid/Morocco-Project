@@ -1,13 +1,13 @@
-const Joi = require('joi');
-const { Record } = require('../model/DataModel');
-const qr = require('qrcode');
-const NodemailerTransporter = require('../middlewares/NodeMailer');
-const { generateTransactionRef } = require('../utils/generateTransactionRef');
-const https = require('https');
-const { default: axios } = require('axios');
-const { Token } = require('../model/TokenModel');
-const moment = require('moment');
-const { Booking } = require('../model/BookingModel');
+const Joi = require("joi");
+const { Record } = require("../model/DataModel");
+const qr = require("qrcode");
+const NodemailerTransporter = require("../middlewares/NodeMailer");
+const { generateTransactionRef } = require("../utils/generateTransactionRef");
+const https = require("https");
+const { default: axios } = require("axios");
+const { Token } = require("../model/TokenModel");
+const moment = require("moment");
+const { Booking } = require("../model/BookingModel");
 
 module.exports.get_all_record = async function (req, res) {
   try {
@@ -81,12 +81,17 @@ module.exports.post = async (req, res) => {
     export_morocco,
     meeting_sectors,
     image_url,
-    full_name,
+    first_name,
+    last_name,
     ministry,
     governmental,
     annual_turnover,
     designation,
     cin,
+    cin_expiry,
+    passport_number,
+    passport_expiry,
+    cities,
   } = req.body;
 
   try {
@@ -105,12 +110,17 @@ module.exports.post = async (req, res) => {
       image_url,
       payment: undefined,
       date_created: new Date(),
-      full_name,
+      first_name,
+      last_name,
       ministry,
       governmental,
       annual_turnover,
       designation,
       cin,
+      cin_expiry,
+      passport_number,
+      passport_expiry,
+      cities,
     });
 
     // Retrieve the inserted document's _id
@@ -126,27 +136,55 @@ module.exports.post = async (req, res) => {
     );
 
     let attachment = {
-      filename: 'qr_code.png',
-      content: qrData.split(';base64,').pop(),
-      encoding: 'base64',
+      filename: "qr_code.png",
+      content: qrData.split(";base64,").pop(),
+      encoding: "base64",
     };
 
     let mailOptions = {
       from: process.env.EMAIL_ADDRESS, // sender address
       to: email, // list of receivers
-      subject: 'Registration Succesful', // Subject line
-      html: '<p style="font-weight:bold">Pleae come along with the below QR-code to the center for verification:</p><img src="cid:qr_code" style="height: 150px; width: 150px;">', // HTML body with image embedded
-      attachments: [
-        {
-          ...attachment,
-          cid: 'qr_code', // Content ID for referencing the image in HTML
-        },
-      ],
+      subject: "Nigeria-Morocco Business Week 2025", // Subject line
+      html: `
+        <div style="font-family: Arial, sans-serif; background: #f9f9f9; padding: 30px; border-radius: 8px; max-width: 500px; margin: auto; color: #222;">
+          <div style="text-align: center; margin-bottom: 24px;">
+            <h2 style="color: #0a4d8c; margin-bottom: 8px;">Nigeria-Morocco Business Week 2025</h2>
+            <p style="font-size: 16px; margin: 0;">Registration Confirmation</p>
+          </div>
+          <div style="background: #fff; padding: 24px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+            <p style="font-size: 16px;">Dear <strong>${first_name} ${last_name}</strong>,</p>
+            <p style="font-size: 15px;">Thank you for registering for the <strong>Nigeria-Morocco Business Week 2025</strong>! We are delighted to confirm your interest in participating in this prestigious event, where business leaders and innovators from both nations will connect and collaborate.</p>
+          <!--  <p style="font-size: 15px;">Please find your unique QR code below. Kindly present this code at the event entrance for a smooth check-in process:</p>
+            <div style="text-align: center; margin: 20px 0;">
+              <img src="cid:qr_code" style="height: 150px; width: 150px; border: 1px solid #eee; border-radius: 8px;" alt="QR Code">
+            </div> -->
+            <p style="font-size: 15px;">Event Details:<br>
+              <strong>📅 Date:</strong> 8th - 11th December 2025<br>
+              <strong>📍 Locations:</strong> Lagos, Kano and Abuja (Nigeria)<br>
+              <strong>🕗 Time:</strong> 08:00 - 19:00 daily
+            </p>
+            <p style="font-size: 15px;">To secure and confirm your participation, kindly proceed with the payment of your registration fee. Your participation will be fully confirmed upon receipt of payment.</p>
+            <p style="font-size: 15px;">Payment details and invoice will be sent upon request.</p>
+        <!-- <p style="font-size: 15px;">We look forward to welcoming you! If you have any questions, feel free to reply to this email.</p> -->
+            <p style="font-size: 15px; margin-top: 32px;">Best regards,<br><span style="color: #0a4d8c; font-weight: bold;">Nigeria-Morocco Business Week Team</span></p>
+          </div>
+          <div style="text-align: center; font-size: 12px; color: #888; margin-top: 24px;">
+            &copy; 2025 Nigeria-Morocco Business Week. All rights reserved.
+          </div>
+        </div>
+      `, // HTML body with image embedded
+
+      // attachments: [
+      //   {
+      //     ...attachment,
+      //     cid: "qr_code", // Content ID for referencing the image in HTML
+      //   },
+      // ],
     };
     await NodemailerTransporter.sendMail(mailOptions);
 
     res.status(200).json({
-      message: 'Regitered Successfully',
+      message: "Regitered Successfully",
       success: true,
       id: insertedId,
     });
@@ -183,17 +221,17 @@ module.exports.edit_record = async function (req, res) {
       res.status(200).json({
         success: true,
         data: update,
-        msg: 'Update successfully',
+        msg: "Update successfully",
       });
     } else {
       res.status(404).json({
         success: false,
-        error: 'Record with the ID Provided not found',
+        error: "Record with the ID Provided not found",
       });
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: 'Error updating record' });
+    res.status(500).json({ error: "Error updating record" });
   }
 };
 
@@ -205,10 +243,10 @@ module.exports.deleteRecord = async function (req, res) {
     if (findRecord) {
       await Record.findByIdAndDelete(id)
         .then((resutlt) => {
-          console.log('DELETE', resutlt);
+          console.log("DELETE", resutlt);
           res.json({
             success: true,
-            msg: 'Record deleted successfully',
+            msg: "Record deleted successfully",
             data: resutlt,
           });
           return;
@@ -220,7 +258,7 @@ module.exports.deleteRecord = async function (req, res) {
     } else {
       res.status(500).json({
         success: false,
-        error: 'Record with the ID Provided not found',
+        error: "Record with the ID Provided not found",
       });
       return;
     }
@@ -239,7 +277,7 @@ module.exports.generateTransaction = async function (req, res) {
     const uniqueRef = generateTransactionRef();
     let data = {
       method,
-      status: 'PENDING',
+      status: "PENDING",
       reference: uniqueRef,
       date: new Date(),
       amount: 2000,
@@ -265,12 +303,12 @@ module.exports.generateTransaction = async function (req, res) {
     } else {
       res.status(404).json({
         success: false,
-        error: 'Record with the ID Provided not found',
+        error: "Record with the ID Provided not found",
       });
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: 'Error updating record' });
+    res.status(500).json({ error: "Error updating record" });
   }
 };
 
@@ -284,23 +322,23 @@ module.exports.verifyTransaction = async function (req, res) {
     if (findRecord) {
       console.log(findRecord.payment.reference);
       const options = {
-        hostname: 'api.paystack.co',
+        hostname: "api.paystack.co",
         port: 443,
         path: `/transaction/verify/${findRecord.payment.reference}`,
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${process.env.PAYSTACK_SECRET}`,
         },
       };
 
       const apiReq = https.request(options, (apiRes) => {
-        let data = '';
+        let data = "";
 
-        apiRes.on('data', (chunk) => {
+        apiRes.on("data", (chunk) => {
           data += chunk;
         });
 
-        apiRes.on('end', async () => {
+        apiRes.on("end", async () => {
           const parsedData = JSON.parse(data);
           console.log(parsedData);
           if (parsedData.status) {
@@ -310,7 +348,7 @@ module.exports.verifyTransaction = async function (req, res) {
                 $set: {
                   payment: {
                     status: parsedData.data.status,
-                    method: 'PAYSTACK',
+                    method: "PAYSTACK",
                     reference: findRecord.payment.reference,
                     date: parsedData.data.paid_at,
                     amount: parsedData.data.amount / 100,
@@ -325,9 +363,9 @@ module.exports.verifyTransaction = async function (req, res) {
         });
       });
 
-      apiReq.on('error', (error) => {
+      apiReq.on("error", (error) => {
         console.error(error);
-        res.status(500).json({ error: 'An error occurred' });
+        res.status(500).json({ error: "An error occurred" });
       });
 
       // End the request
@@ -344,12 +382,12 @@ module.exports.verifyTransaction = async function (req, res) {
     } else {
       res.status(404).json({
         success: false,
-        error: 'Record with the ID Provided not found',
+        error: "Record with the ID Provided not found",
       });
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: 'Error updating record' });
+    res.status(500).json({ error: "Error updating record" });
   }
 };
 
@@ -357,7 +395,7 @@ module.exports.verifyTransaction = async function (req, res) {
 module.exports.generateTransactionToken = async function (req, res) {
   const email = req.params.email;
   const creation_date = new Date();
-  const uniqueRef = generateTransactionRef() + '-TOKEN';
+  const uniqueRef = generateTransactionRef() + "-TOKEN";
   const expire_date = new Date(creation_date);
   expire_date.setDate(expire_date.getDate() + 1);
   expire_date.setHours(
@@ -390,13 +428,13 @@ module.exports.verifyGeneratedToken = async function (req, res) {
     if (fined.used) {
       return res.status(401).json({
         success: false,
-        error: 'Token already used',
+        error: "Token already used",
       });
     }
     if (isExpired) {
       return res.status(401).json({
         success: false,
-        error: 'Token expired',
+        error: "Token expired",
       });
     }
     if (fined.reference == token) {
@@ -414,8 +452,8 @@ module.exports.verifyGeneratedToken = async function (req, res) {
           {
             $set: {
               payment: {
-                status: 'Success',
-                method: 'CODE',
+                status: "Success",
+                method: "CODE",
                 reference: fined.reference,
                 date: new Date(),
                 amount: 2000,
@@ -429,8 +467,8 @@ module.exports.verifyGeneratedToken = async function (req, res) {
           {
             $set: {
               payment: {
-                status: 'Success',
-                method: 'CODE',
+                status: "Success",
+                method: "CODE",
                 reference: fined.reference,
                 date: new Date(),
                 amount: 2000,
@@ -443,13 +481,13 @@ module.exports.verifyGeneratedToken = async function (req, res) {
     } else {
       res.status(401).json({
         success: false,
-        error: 'Invalid Token',
+        error: "Invalid Token",
       });
     }
   } else {
     res.status(404).json({
       success: false,
-      error: 'Token Not Found',
+      error: "Token Not Found",
     });
   }
 };
@@ -471,11 +509,11 @@ module.exports.createBooking = async function (req, res) {
     personal_meters,
   } = req.body;
   try {
-    const uniqueRef = generateTransactionRef() + 'BOOKING';
+    const uniqueRef = generateTransactionRef() + "BOOKING";
 
     let data = {
       method,
-      status: 'PENDING',
+      status: "PENDING",
       reference: uniqueRef,
       date: new Date(),
       amount: 2000,
@@ -507,7 +545,7 @@ module.exports.createBooking = async function (req, res) {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: 'Error Creating Booking' });
+    res.status(500).json({ error: "Error Creating Booking" });
   }
 };
 
@@ -520,23 +558,23 @@ module.exports.verifyBooking = async function (req, res) {
     const findRecord = await Booking.findById(id);
     if (findRecord) {
       const options = {
-        hostname: 'api.paystack.co',
+        hostname: "api.paystack.co",
         port: 443,
         path: `/transaction/verify/${findRecord.payment.reference}`,
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${process.env.PAYSTACK_SECRET}`,
         },
       };
 
       const apiReq = https.request(options, (apiRes) => {
-        let data = '';
+        let data = "";
 
-        apiRes.on('data', (chunk) => {
+        apiRes.on("data", (chunk) => {
           data += chunk;
         });
 
-        apiRes.on('end', async () => {
+        apiRes.on("end", async () => {
           const parsedData = JSON.parse(data);
 
           if (parsedData.status) {
@@ -546,7 +584,7 @@ module.exports.verifyBooking = async function (req, res) {
                 $set: {
                   payment: {
                     status: parsedData.data.status,
-                    method: 'PAYSTACK',
+                    method: "PAYSTACK",
                     reference: findRecord.payment.reference,
                     date: parsedData.data.paid_at,
                     amount: parsedData.data.amount / 100,
@@ -561,9 +599,9 @@ module.exports.verifyBooking = async function (req, res) {
         });
       });
 
-      apiReq.on('error', (error) => {
+      apiReq.on("error", (error) => {
         console.error(error);
-        res.status(500).json({ error: 'An error occurred' });
+        res.status(500).json({ error: "An error occurred" });
       });
 
       // End the request
@@ -580,11 +618,11 @@ module.exports.verifyBooking = async function (req, res) {
     } else {
       res.status(404).json({
         success: false,
-        error: 'Record with the ID Provided not found',
+        error: "Record with the ID Provided not found",
       });
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: 'Error updating record' });
+    res.status(500).json({ error: "Error updating record" });
   }
 };
