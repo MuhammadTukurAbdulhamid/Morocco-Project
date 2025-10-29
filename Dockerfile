@@ -12,7 +12,7 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV=production
 
-
+console.log
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
