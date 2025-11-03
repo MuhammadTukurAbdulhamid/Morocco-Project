@@ -1,72 +1,74 @@
-import { useTranslation } from "react-i18next";
+
+import { TwitterOutlined, InstagramOutlined, LinkedinOutlined } from '@ant-design/icons';
 
 export default function Footer() {
-  const { t } = useTranslation();
   return (
-    <div className="min-h-[344px] bg-lightBlack text-white py-10 flex flex-col-reverse md:flex-row md:justify-between  px-5 md:px-20 lg:px-40 gap-10">
-      <div className="flex flex-col gap-5 w-[40%]">
-        <h1 className="font-bold text-3xl">Nigeria-Morocco</h1>
-        <p className="text-[13px]">{t("copyright")}</p>
-        <p className="text-[13px]">{t("rights")}</p>
+    <div className="bg-black text-white border-t-4 ">
+      <div className=" mx-auto py-10 flex flex-col-reverse md:flex-row md:justify-between px-5 md:px-20 lg:px-40 gap-10">
+        {/* Left Column - Brand */}
+        <div className="flex flex-col gap-5 md:w-[40%]">
+       <div className="flex items-center gap-2">
+  <img
+    src="https://flagcdn.com/w40/ng.png"
+    alt="Nigeria flag"
+    className="w-4 h-3 rounded-sm shadow-sm"
+  />
+  <h1 className="font-bold text-2xl flex items-center gap-2">
+    Nigeria - Morocco
+    <img
+      src="https://flagcdn.com/w40/ma.png"
+      alt="Morocco flag"
+      className="w-4 h-3 rounded-sm shadow-sm"
+    />
+  </h1>
+</div>
 
-        <div className="flex items-center mt-[auto]">
-          <div className="bg-[rgba(255,255,255,0.2)] w-[32px] h-[32px] rounded-full flex items-center mr-2 justify-center">
-            <i className="fa-brands fa-youtube"></i>
+
+          <p className="text-sm text-gray-300 leading-relaxed">
+            Advancing Nigeria - Morocco Trade & Investments through Economic Integration & Implementation.
+          </p>
+
+          <div className="flex items-center gap-3 mt-auto">
+            <a href="#" className="w-8 h-8 border border-gray-300 bg-black rounded flex items-center justify-center hover:bg-gray-800 transition">
+              <TwitterOutlined className="text-white" />
+            </a>
+            <a href="#" className="w-8 h-8 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 rounded flex items-center justify-center hover:opacity-90 transition">
+              <InstagramOutlined className="text-white" />
+            </a>
+            <a href="#" className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center hover:bg-blue-700 transition">
+              <LinkedinOutlined className="text-white" />
+            </a>
+          </div>
+        </div>
+
+        {/* Right Column - Links Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-10 flex-1">
+          {/* Quick Links */}
+          <div className="flex flex-col gap-3">
+            <h2 className="font-bold text-base mb-2">Quick Links</h2>
+            <a href="#" className="text-sm text-gray-300 hover:text-white transition">About</a>
+            <a href="#" className="text-sm text-gray-300 hover:text-white transition">Sectors</a>
+            <a href="#" className="text-sm text-gray-300 hover:text-white transition">Sponsors & Partners</a>
+            <a href="#" className="text-sm text-gray-300 hover:text-white transition">Updates</a>
+            <a href="#" className="text-sm text-gray-300 hover:text-white transition">Contact Us</a>
           </div>
 
-          <div className="bg-[rgba(255,255,255,0.2)] w-[32px] h-[32px] rounded-full flex items-center mr-2 justify-center">
-            <i className="fa-brands fa-x-twitter"></i>
+          {/* Resources */}
+          <div className="flex flex-col gap-3">
+            <h2 className="font-bold text-base mb-2">Resources</h2>
+            <a href="#" className="text-sm text-gray-300 hover:text-white transition">Travel Guide</a>
+            <a href="#" className="text-sm text-gray-300 hover:text-white transition">Contact</a>
+            <a href="#" className="text-sm text-gray-300 hover:text-white transition">Page</a>
           </div>
         </div>
       </div>
 
-      {/* QUICK LINKS */}
-      <div className=" grid grid-cols-2 md:grid-cols-3 gap-10 flex-1">
-        {/* <div className="gap-2 flex flex-col">
-          <h1 className="font-bold mb-2 md:mb-8">{t("links")}</h1>
-          <span className="text-[13px]">Register Now</span>
-          <span className="text-[13px]">Terms of service</span>
-          <span className="text-[13px]">Contact Us</span>
-        </div> */}
-
-        <div className="gap-2 flex flex-col">
-          <h1 className="font-bold mb-2 md:mb-8">{t("follow")}</h1>
-          <span className="text-[13px]">
-            <i className="fa-brands fa-facebook text-[24px] mr-2" />
-            Facebook
-          </span>
-          <span className="text-[13px]">
-            <i className="fa-brands fa-instagram text-[24px] mr-2" />
-            Instagram
-          </span>
-          <span className="text-[13px]">
-            <i className="fa-brands fa-linkedin text-[24px] mr-2" />
-            LinkedIn
-          </span>
-          {/* <span className="text-[13px]">
-            <i className="fa-brands fa-youtube text-[24px] mr-2" />
-            YouTube
-          </span> */}
-        </div>
-
-        <div className="gap-2 flex flex-col w-[120%]">
-          <h1 className="font-bold mb-2 md:mb-8">Infos</h1>
-          <span className="text-[13px]">
-            <i className="fa-solid fa-location-dot mr-2" />
-            Lagos, Kano and Abuja (Nigeria)
-          </span>
-          <span className="text-[13px]">
-            <i className="fa-solid fa-calendar mr-2" />
-            8th - 11th December 2025
-          </span>
-          <span className="text-[13px]">
-            <i className="fa-solid fa-clock mr-2" />
-            From 08h00 to 19h00
-          </span>
-          <span className="text-[13px]">
-            <i className="fa-solid fa-envelope mr-2" />
-            info@nigeria-moroccobusinessweek.com
-          </span>
+      {/* Bottom Copyright Bar */}
+      <div className="border-t border-gray-800">
+        <div className="max-w-7xl mx-auto py-4 px-5 md:px-20 lg:px-40">
+          <p className="text-xs text-gray-400 text-center md:text-left">
+            © 2025 Nigeria-Morocco Business Week. All rights reserved.
+          </p>
         </div>
       </div>
     </div>
