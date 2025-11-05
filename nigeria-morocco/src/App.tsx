@@ -43,7 +43,7 @@ function App() {
               <Route path="/Invoice" element={<Invoice />} />
               <Route path="/BookingInvoice" element={<BookingInvoice />} />
               <Route path="/Success" element={<Success />} />
-              <Route path="/Login" element={<Login />} />
+              <Route path="/house" element={<Login />} />
               <Route path="/dashboard" element={<PrivateRoutes />}>
                 <Route index element={<DashboardHome />} />
                 <Route path="user" element={<UserProfile />} />
