@@ -17,6 +17,7 @@ interface AchievementData {
   images: AchievementImage[];
   content: string[];
   highlights?: string[];
+  useCarousel?: boolean;
 }
 
 const AchievementsSection: React.FC = () => {
@@ -25,6 +26,7 @@ const AchievementsSection: React.FC = () => {
   const exhibitionRef = useRef<HTMLDivElement>(null);
   const b2bRef = useRef<HTMLDivElement>(null);
   const mouRef = useRef<HTMLDivElement>(null);
+  const panelSessionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
 
   const headerInView = useInView(headerRef, { once: true, amount: 0.3 });
@@ -33,16 +35,20 @@ const AchievementsSection: React.FC = () => {
     highlights: {
       id: "highlights",
       title: "Event Highlights",
-      description: "Report of The First Edition of The Nigeria – Morocco Business Week",
+      description:
+        "Report of The First Edition of The Nigeria – Morocco Business Week",
       date: "28th October – 1st November 2024",
       venue: "Sofitel Hotel, Casablanca, Morocco",
       images: [
-        { src: "/achievements/highlights-4.jpg", alt: "Event Highlights 4" },
+        { src: "/achievements/panel-session-4.jpeg", alt: "Panel Session 3" },
         { src: "/achievements/highlights-1.jpg", alt: "Event Highlights 1" },
         { src: "/achievements/highlights-2.jpg", alt: "Event Highlights 2" },
         { src: "/achievements/highlights-3.jpg", alt: "Event Highlights 3" },
-        { src: "/achievements/highlights-4.jpg", alt: "Event Highlights 4" },
         { src: "/achievements/highlights-5.jpg", alt: "Event Highlights 5" },
+        { src: "/achievements/highlights-6.jpeg", alt: "Event Highlights 6" },
+        { src: "/achievements/highlights-7.jpeg", alt: "Event Highlights 7" },
+        { src: "/achievements/highlights-8.jpeg", alt: "Event Highlights 8" },
+        { src: "/achievements/highlights-9.jpeg", alt: "Event Highlights 9" },
       ],
       content: [
         "First Edition",
@@ -67,7 +73,10 @@ const AchievementsSection: React.FC = () => {
         { src: "/achievements/exhibition-2.jpg", alt: "Exhibition Stand 2" },
         { src: "/achievements/exhibition-3.jpg", alt: "Products Exhibition" },
         { src: "/achievements/exhibition-4.jpg", alt: "Jigawa State Stand" },
-        { src: "/achievements/exhibition-5.jpg", alt: "Highland Integrated Stand" },
+        {
+          src: "/achievements/exhibition-5.jpg",
+          alt: "Highland Integrated Stand",
+        },
       ],
       content: [
         "Exhibitions showcasing key industries such as agriculture, energy, and steel",
@@ -80,7 +89,8 @@ const AchievementsSection: React.FC = () => {
     b2b: {
       id: "b2b",
       title: "B2B Meetings",
-      description: "Business-to-Business meetings facilitating direct partnerships",
+      description:
+        "Business-to-Business meetings facilitating direct partnerships",
       images: [
         { src: "/achievements/b2b-1.jpg", alt: "B2B Meeting 1" },
         { src: "/achievements/b2b-2.jpg", alt: "B2B Meeting 2" },
@@ -121,6 +131,26 @@ const AchievementsSection: React.FC = () => {
         "Nigeria-Morocco Economic Forum: Proposal to create a formal joint business forum and initiate bi-monthly virtual follow-up meetings",
       ],
     },
+    panelSession: {
+      id: "panelSession",
+      title: "Panel Sessions",
+      description:
+        "Seminars and panel discussions on policy, regulatory frameworks, and investment opportunities",
+      images: [
+        { src: "/achievements/panel-session-1.jpeg", alt: "Panel Session 1" },
+        { src: "/achievements/panel-session-2.jpeg", alt: "Panel Session 2" },
+        { src: "/achievements/panel-session-3.jpeg", alt: "Panel Session 3" },
+        { src: "/achievements/panel-session-4.jpeg", alt: "Panel Session 3" },
+      ],
+      content: [
+        "Panel Sessions on the regulatory environment, AfCFTA, and bilateral trade opportunities in sectors like agriculture, automotive, solid minerals, and steel",
+        "The Role of Chambers of Commerce in enhancing economic relations between Nigeria and Morocco",
+        "Panel Session on Energy, Steel & Solid Minerals with key stakeholders from both countries",
+        "Closed-Door Roundtable Discussion addressing regulatory challenges and solutions to facilitate trade",
+        "High-level discussions on policy frameworks and investment opportunities",
+      ],
+      useCarousel: true,
+    },
   };
 
   const tabs = [
@@ -128,9 +158,13 @@ const AchievementsSection: React.FC = () => {
     { id: "exhibition", label: "Exhibition", ref: exhibitionRef },
     { id: "b2b", label: "B2B Meeting", ref: b2bRef },
     { id: "mou", label: "SIGNED MOU", ref: mouRef },
+    { id: "panelSession", label: "Panel Sessions", ref: panelSessionRef },
   ];
 
-  const handleTabClick = (tabId: string, ref: React.RefObject<HTMLDivElement>) => {
+  const handleTabClick = (
+    tabId: string,
+    ref: React.RefObject<HTMLDivElement>
+  ) => {
     setActiveTab(tabId);
     setTimeout(() => {
       ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -158,9 +192,15 @@ const AchievementsSection: React.FC = () => {
     },
   };
 
-  const renderAchievementSection = (achievement: AchievementData, ref: React.RefObject<HTMLDivElement>) => {
+  const renderAchievementSection = (
+    achievement: AchievementData,
+    ref: React.RefObject<HTMLDivElement>
+  ) => {
     const sectionInView = useInView(ref, { once: true, amount: 0.2 });
-    const useCarousel = achievement.images.length > 3;
+    const useCarousel =
+      achievement.useCarousel !== undefined
+        ? achievement.useCarousel
+        : achievement.images.length > 3;
 
     return (
       <motion.div
@@ -180,7 +220,9 @@ const AchievementsSection: React.FC = () => {
             >
               {achievement.title}
             </motion.h2>
-            <p className="text-lg text-gray-600 mb-4">{achievement.description}</p>
+            <p className="text-lg text-gray-600 mb-4">
+              {achievement.description}
+            </p>
             {achievement.date && (
               <p className="text-md text-gray-700 mb-2">
                 <span className="font-semibold">Date:</span> {achievement.date}
@@ -188,7 +230,8 @@ const AchievementsSection: React.FC = () => {
             )}
             {achievement.venue && (
               <p className="text-md text-gray-700 mb-6">
-                <span className="font-semibold">Venue:</span> {achievement.venue}
+                <span className="font-semibold">Venue:</span>{" "}
+                {achievement.venue}
               </p>
             )}
           </motion.div>
@@ -303,7 +346,11 @@ const AchievementsSection: React.FC = () => {
           <motion.h1
             className="text-4xl md:text-4xl font-bold text-gray-800 mb-4"
             initial={{ opacity: 0, scale: 0.9 }}
-            animate={headerInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+            animate={
+              headerInView
+                ? { opacity: 1, scale: 1 }
+                : { opacity: 0, scale: 0.9 }
+            }
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             First Edition of The Nigeria – Morocco Business Week
@@ -311,11 +358,13 @@ const AchievementsSection: React.FC = () => {
           <motion.p
             className="text-lg text-gray-600 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={
+              headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+            }
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            Explore the highlights and outcomes from the First Edition of The Nigeria – Morocco
-            Business Week
+            Explore the highlights and outcomes from the First Edition of The
+            Nigeria – Morocco Business Week
           </motion.p>
         </div>
       </motion.div>
