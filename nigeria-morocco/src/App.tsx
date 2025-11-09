@@ -18,6 +18,7 @@ import UserProfile from "./pages/Dashboard/profile/UserProfile";
 import Users from "./pages/Users/Users";
 import Success from "./pages/Forms/Success";
 import Bookings from "./pages/Bookings/Bookings";
+import News from "./pages/Dashboard/News/News";
 // MADE IT PUBLIC asdasd
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
                 <Route path="profile" element={<Profile />} />
                 <Route path="users" element={<Users />} />
                 <Route path="bookings" element={<Bookings />} />
+                <Route path="news" element={<News />} />
               </Route>
             </Routes>
           </ConfigProvider>

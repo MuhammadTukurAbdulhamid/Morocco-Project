@@ -39,7 +39,14 @@ const auth = async (req, res, next) => {
     }
 
     //console.log(req.headers);// to get the token
-    const decoded = await jwt.verify(token, process.env.jwt_secret); // verify the token
+    const secret = process.env.JWT_SECRET || process.env.jwt_secret;
+    if (!secret) {
+      return res
+        .status(500)
+        .json({ msg: 'Server misconfigured: JWT secret missing', status: false });
+    }
+
+    const decoded = await jwt.verify(token, secret); // verify the token
 
     //console.log(decoded); // to get userid
     const user = await User.findById(decoded.id); // find the user

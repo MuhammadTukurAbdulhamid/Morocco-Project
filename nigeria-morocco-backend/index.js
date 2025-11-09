@@ -5,6 +5,7 @@ const cors = require('cors');
 const multer = require('multer');
 const mongoose = require('mongoose');
 const recordRoute = require('./routes/post.data.route');
+const newsRoute = require('./routes/news.route');
 const { default: axios } = require('axios');
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(recordRoute);
+app.use(newsRoute);
 
 mongoose.connect(process.env.DB_URL);
 const conn = mongoose.connection
