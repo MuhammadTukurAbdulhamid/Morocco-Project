@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LandinPage from "./pages/LandinPage/LandinPage";
+import SecondEdition from "./pages/LandinPage/SecondEdition";
 import { ConfigProvider } from "antd";
 import Register from "./pages/Forms/Register";
 import Invoice from "./pages/Invoice/Invoice";
@@ -39,6 +40,7 @@ function App() {
           >
             <Routes>
               <Route path="/" element={<LandinPage />} />
+              <Route path="/second-edition" element={<SecondEdition />} />
               <Route path="/Register" element={<Register />} />
               <Route path="/Booking" element={<Booking />} />
               <Route path="/Invoice" element={<Invoice />} />

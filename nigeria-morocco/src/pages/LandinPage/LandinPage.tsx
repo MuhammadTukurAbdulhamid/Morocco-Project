@@ -21,17 +21,29 @@ export default function LandinPage() {
   const navigate = useNavigate();
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  const handleNavigateSecondEdition = () => {
+    navigate("/second-edition");
+  };
+
+  const handleNavigateFirstEdition = () => {
+    navigate("/");
+  };
+
   return (
     <div className="relative min-h-screen bg-white overflow-x-hidden">
       <div className="min-h-screen flex flex-col relative">
         <NavBar
           onRegister={() => setIsModalOpen(true)}
           onBook={() => setBookingModalOpen(true)}
+          onNavigateSecondEdition={handleNavigateSecondEdition}
+          onNavigateFirstEdition={handleNavigateFirstEdition}
+          currentEdition="first"
         />
         <div className="absolute inset-0 bg-gradient from-primary/80 via-blue-900/30 to-transparent z-0 pointer-events-none" />
         <HeroCarousel
           onRegister={() => setIsModalOpen(true)}
           onBook={() => setBookingModalOpen(true)}
+          onNavigateSecondEdition={handleNavigateSecondEdition}
         />
       </div>
 

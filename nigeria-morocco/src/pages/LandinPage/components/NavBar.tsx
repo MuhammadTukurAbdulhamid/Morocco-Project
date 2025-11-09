@@ -6,122 +6,300 @@ import MenuIcon from "./MenuIcon";
 import { Drawer } from "antd";
 
 interface Props {
-    onRegister: () => void;
-    onBook: () => void;
+  onRegister: () => void;
+  onBook: () => void;
+  onNavigateSecondEdition: () => void;
+  onNavigateFirstEdition: () => void;
+  currentEdition?: "first" | "second";
 }
 
-const NavBar: React.FC<Props> = ({ onRegister, onBook }) => {
-    const { t, i18n } = useTranslation();
-    const items = [
-        {
-            key: "1",
-            label: (
-                <span
-                    onClick={() => {
-                        i18n.changeLanguage("en");
-                    }}
-                >
-                    English 🇬🇧
-                </span>
-            ),
-        },
-        {
-            key: "2",
-            label: (
-                <span
-                    onClick={() => {
-                        i18n.changeLanguage("fr");
-                    }}
-                >
-                    French 🇫🇷
-                </span>
-            ),
-        },
-    ];
+const NavBar: React.FC<Props> = ({
+  onRegister,
+  onBook,
+  onNavigateSecondEdition,
+  onNavigateFirstEdition,
+  currentEdition = "first",
+}) => {
+  const { t, i18n } = useTranslation();
+  const items = [
+    {
+      key: "1",
+      label: (
+        <span
+          onClick={() => {
+            i18n.changeLanguage("en");
+          }}
+        >
+          English 🇬🇧
+        </span>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <span
+          onClick={() => {
+            i18n.changeLanguage("fr");
+          }}
+        >
+          French 🇫🇷
+        </span>
+      ),
+    },
+  ];
 
-    const [open, setOpen] = useState(false);
-    const showDrawer = () => setOpen(true);
-    const onClose = () => setOpen(false);
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => setOpen(true);
+  const onClose = () => setOpen(false);
+
+  const isFirstEdition = currentEdition === "first";
+  const isSecondEdition = currentEdition === "second";
+
+  const renderEditionLinks = (variant: "desktop" | "mobile") => {
+    const handleSecondEditionClick = () => {
+      if (!isSecondEdition) {
+        onNavigateSecondEdition();
+        if (variant === "mobile") {
+          onClose();
+        }
+      }
+    };
+
+    const handleFirstEditionClick = () => {
+      if (!isFirstEdition) {
+        onNavigateFirstEdition();
+        if (variant === "mobile") {
+          onClose();
+        }
+      }
+    };
 
     return (
-        <div className="nav sticky top-0 z-30 py-8 px-5 md:px-20 lg:px-30 min-h-20 p-0 bg-white backdrop-blur-md shadow-md flex items-center justify-between">
-            <div className="flex items-center justify-center gap-2 whitespace-nowrap">
-                <img
-                    src="https://flagcdn.com/w40/ng.png"
-                    alt="Nigeria flag"
-                    className="w-4 h-3 rounded-sm shadow-sm"
-                />
-
-                <h1 className="text-xl md:text-2xl font-semibold text-black flex items-center gap-2 drop-shadow">
-                    Nigeria - Morocco
-                </h1>
-
-                <img
-                    src="https://flagcdn.com/w40/ma.png"
-                    alt="Morocco flag"
-                    className="w-5 h-4 md:w-4 md:h-3 rounded-sm shadow-sm object-cover"
-                />
-            </div>
-
-
-            <div className="hidden xl:flex items-center space-x-6 whitespace-nowrap">
-                <a className="text-md hover:text-primary transition font-medium" href="/"> {t("About")}</a>
-                <a className="text-md hover:text-primary transition font-medium" href="#partners"> {t("Sector")} </a>
-                <a className="text-md hover:text-primary transition font-medium" href="#partners"> {t("Sponsors & Partner")} </a>
-                <a className="text-md hover:text-primary transition font-medium" href="#partners"> {t("Updates")} </a>
-                <a className="text-md hover:text-primary transition font-medium" href="#partners"> {t("Contact")} </a>
-                {i18n?.language === "fr" ? (
-                    <>
-                        <Button type="primary" ghost onClick={(e) => { e.preventDefault(); onBook(); }} className="h-[40px] hover:scale-105 transition">
-                            Obtenez Votre Stand/Espace
-                        </Button>
-                        <Button onClick={onRegister} className="bg-primary h-[40px] text-white hover:scale-105 transition">Obtenez Votre Badge</Button>
-                    </>
-                ) : (
-                    <>
-                        <Button onClick={onRegister} className="bg-primary px-6  h-[40px] text-white hover:scale-105 transition">{t("Participate")}</Button>
-                    </>
-                )}
-                <Dropdown menu={{ items }}>
-                    <a className="cursor-pointer" onClick={(e) => e.preventDefault()}>
-                        <Space>
-                            <p className="text-[10px]">{i18n.language == "en" ? "English Language" : "French Language"}</p>
-                            <GlobeIcon />
-                        </Space>
-                    </a>
-                </Dropdown>
-            </div>
-
-            <div className="flex items-center gap-4 xl:hidden">
-                <Dropdown menu={{ items }}>
-                    <a className="cursor-pointer" onClick={(e) => e.preventDefault()}>
-                        <GlobeIcon />
-                    </a>
-                </Dropdown>
-                <div onClick={showDrawer}>
-                    <MenuIcon />
-                </div>
-            </div>
-
-            <Drawer title="Menu" onClose={onClose} open={open}>
-                <div className="flex flex-col items-center gap-[20px]">
-                    <a onClick={onClose} className="text-[14px]  w-full text-center" href="/">{t("Home")}</a>
-                    <a onClick={onClose} className="text-[14px] w-full text-center" href="#partners">{t("Sponsors")}</a>
-                    {i18n?.language === "fr" ? (
-                        <>
-                            <Button type="primary" ghost onClick={(e) => { e.preventDefault(); onBook(); }} className="w-full h-[40px]">Obtenez Votre Stand/Espace</Button>
-                            <Button onClick={onRegister} className="bg-primary px-6 h-[40px] text-white">Obtenez Votre Badge</Button>
-                        </>
-                    ) : (
-                        <>
-                            <Button type="primary" ghost onClick={(e) => { e.preventDefault(); onBook(); }} className="w-full h-[40px]">Book A Space</Button>
-                            <Button onClick={onRegister} className="bg-primary px-6 h-[40px] text-white">Participate</Button>
-                        </>
-                    )}
-                </div>
-            </Drawer>
-        </div>
+      <div
+        className={
+          variant === "desktop"
+            ? "flex items-center gap-4"
+            : "w-full flex flex-col gap-3"
+        }
+      >
+        <button
+          onClick={handleSecondEditionClick}
+          className={
+            variant === "desktop"
+              ? `text-sm font-semibold ${
+                  isSecondEdition
+                    ? "text-primary underline underline-offset-4"
+                    : "text-gray-700 hover:text-primary"
+                }`
+              : `w-full text-center py-2 rounded-md border ${
+                  isSecondEdition
+                    ? "border-primary text-primary font-semibold"
+                    : "border-transparent text-gray-700 hover:text-primary"
+                }`
+          }
+          type="button"
+          aria-current={isSecondEdition ? "page" : undefined}
+        >
+          {t("secondEditionLink", { defaultValue: "2nd Edition" })}
+        </button>
+        <button
+          onClick={handleFirstEditionClick}
+          className={
+            variant === "desktop"
+              ? `text-sm font-semibold ${
+                  isFirstEdition
+                    ? "text-primary underline underline-offset-4"
+                    : "text-gray-700 hover:text-primary"
+                }`
+              : `w-full text-center py-2 rounded-md border ${
+                  isFirstEdition
+                    ? "border-primary text-primary font-semibold"
+                    : "border-transparent text-gray-700 hover:text-primary"
+                }`
+          }
+          type="button"
+          aria-current={isFirstEdition ? "page" : undefined}
+        >
+          {t("firstEditionLink", { defaultValue: "1st Edition" })}
+        </button>
+      </div>
     );
+  };
+
+  return (
+    <div className="nav sticky top-0 z-30 py-8 px-5 md:px-20 lg:px-30 min-h-20 p-0 bg-white backdrop-blur-md shadow-md flex items-center justify-between">
+      <div className="flex items-center justify-center gap-2 whitespace-nowrap">
+        <img
+          src="https://flagcdn.com/w40/ng.png"
+          alt="Nigeria flag"
+          className="w-4 h-3 rounded-sm shadow-sm"
+        />
+
+        <h1 className="text-xl md:text-2xl font-semibold text-black flex items-center gap-2 drop-shadow">
+          Nigeria - Morocco
+        </h1>
+
+        <img
+          src="https://flagcdn.com/w40/ma.png"
+          alt="Morocco flag"
+          className="w-5 h-4 md:w-4 md:h-3 rounded-sm shadow-sm object-cover"
+        />
+      </div>
+
+      <div className="hidden xl:flex items-center space-x-6 whitespace-nowrap">
+        <a
+          className="text-md hover:text-primary transition font-medium"
+          href="/"
+        >
+          {" "}
+          {t("About")}
+        </a>
+        <a
+          className="text-md hover:text-primary transition font-medium"
+          href="#partners"
+        >
+          {" "}
+          {t("Sector")}{" "}
+        </a>
+        <a
+          className="text-md hover:text-primary transition font-medium"
+          href="#partners"
+        >
+          {" "}
+          {t("Sponsors & Partner")}{" "}
+        </a>
+        <a
+          className="text-md hover:text-primary transition font-medium"
+          href="#partners"
+        >
+          {" "}
+          {t("Updates")}{" "}
+        </a>
+        <a
+          className="text-md hover:text-primary transition font-medium"
+          href="#partners"
+        >
+          {" "}
+          {t("Contact")}{" "}
+        </a>
+        {renderEditionLinks("desktop")}
+        {i18n?.language === "fr" ? (
+          <>
+            <Button
+              type="primary"
+              ghost
+              onClick={(e) => {
+                e.preventDefault();
+                onBook();
+              }}
+              className="h-[40px] hover:scale-105 transition"
+            >
+              Obtenez Votre Stand/Espace
+            </Button>
+            <Button
+              onClick={onRegister}
+              className="bg-primary h-[40px] text-white hover:scale-105 transition"
+            >
+              Obtenez Votre Badge
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              onClick={onRegister}
+              className="bg-primary px-6  h-[40px] text-white hover:scale-105 transition"
+            >
+              {t("Participate")}
+            </Button>
+          </>
+        )}
+        <Dropdown menu={{ items }}>
+          <a className="cursor-pointer" onClick={(e) => e.preventDefault()}>
+            <Space>
+              <p className="text-[10px]">
+                {i18n.language == "en" ? "English Language" : "French Language"}
+              </p>
+              <GlobeIcon />
+            </Space>
+          </a>
+        </Dropdown>
+      </div>
+
+      <div className="flex items-center gap-4 xl:hidden">
+        <Dropdown menu={{ items }}>
+          <a className="cursor-pointer" onClick={(e) => e.preventDefault()}>
+            <GlobeIcon />
+          </a>
+        </Dropdown>
+        <div onClick={showDrawer}>
+          <MenuIcon />
+        </div>
+      </div>
+
+      <Drawer title="Menu" onClose={onClose} open={open}>
+        <div className="flex flex-col items-center gap-[20px]">
+          <a
+            onClick={onClose}
+            className="text-[14px]  w-full text-center"
+            href="/"
+          >
+            {t("Home")}
+          </a>
+          <a
+            onClick={onClose}
+            className="text-[14px] w-full text-center"
+            href="#partners"
+          >
+            {t("Sponsors")}
+          </a>
+          <div className="w-full flex flex-col gap-2">
+            {renderEditionLinks("mobile")}
+          </div>
+          {i18n?.language === "fr" ? (
+            <>
+              <Button
+                type="primary"
+                ghost
+                onClick={(e) => {
+                  e.preventDefault();
+                  onBook();
+                }}
+                className="w-full h-[40px]"
+              >
+                Obtenez Votre Stand/Espace
+              </Button>
+              <Button
+                onClick={onRegister}
+                className="bg-primary px-6 h-[40px] text-white"
+              >
+                Obtenez Votre Badge
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                type="primary"
+                ghost
+                onClick={(e) => {
+                  e.preventDefault();
+                  onBook();
+                }}
+                className="w-full h-[40px]"
+              >
+                Book A Space
+              </Button>
+              <Button
+                onClick={onRegister}
+                className="bg-primary px-6 h-[40px] text-white"
+              >
+                Participate
+              </Button>
+            </>
+          )}
+        </div>
+      </Drawer>
+    </div>
+  );
 };
 
 export default NavBar;
