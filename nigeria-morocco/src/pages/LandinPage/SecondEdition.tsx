@@ -11,7 +11,7 @@ import SecondEditionAbout from "./components/secondEdition/SecondEditionAbout";
 import SecondEditionNews from "./components/secondEdition/SecondEditionNews";
 import SecondEditionTestimonials from "./components/secondEdition/SecondEditionTestimonials";
 import SecondEditionFAQ from "./components/secondEdition/SecondEditionFAQ";
-import NavBar from "./components/NavBar";
+import SecondEditionNavBar from "./components/secondEdition/SecondEditionNavBar";
 
 export default function SecondEdition() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,15 +27,11 @@ export default function SecondEdition() {
 
   return (
     <div className="relative min-h-screen bg-white overflow-x-hidden">
-      <NavBar
+      <SecondEditionNavBar
         onRegister={() => setIsModalOpen(true)}
         onBook={() => setBookingModalOpen(true)}
-        onNavigateSecondEdition={() => navigate("/second-edition")}
-        onNavigateFirstEdition={() => navigate("/")}
-        currentEdition="second"
       />
       <SecondEditionHero
-        onBook={() => setBookingModalOpen(true)}
         onRegister={() => setIsModalOpen(true)}
         onScrollToPartners={handleScrollToPartners}
       />
@@ -56,13 +52,12 @@ export default function SecondEdition() {
         setIsModalOpen={setIsModalOpen}
         bookingModalOpen={bookingModalOpen}
         setBookingModalOpen={setBookingModalOpen}
-            phone={phone}
-            setPhone={setPhone}
-            value={value}
-            setValue={setValue}
+        phone={phone}
+        setPhone={setPhone}
+        value={value}
+        setValue={setValue}
         navigate={navigate}
       />
-
     </div>
   );
 }

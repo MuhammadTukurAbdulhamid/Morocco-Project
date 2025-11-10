@@ -148,35 +148,35 @@ const NavBar: React.FC<Props> = ({
 
       <div className="hidden xl:flex items-center space-x-6 whitespace-nowrap">
         <a
-          className="text-md hover:text-primary transition font-medium"
+          className="text-md font-medium hover:text-primary transition"
           href="/"
         >
           {" "}
           {t("About")}
         </a>
         <a
-          className="text-md hover:text-primary transition font-medium"
+          className="text-md font-medium hover:text-primary transition"
           href="#partners"
         >
           {" "}
           {t("Sector")}{" "}
         </a>
         <a
-          className="text-md hover:text-primary transition font-medium"
+          className="text-md font-medium hover:text-primary transition"
           href="#partners"
         >
           {" "}
           {t("Sponsors & Partner")}{" "}
         </a>
         <a
-          className="text-md hover:text-primary transition font-medium"
+          className="text-md font-medium hover:text-primary transition"
           href="#partners"
         >
           {" "}
           {t("Updates")}{" "}
         </a>
         <a
-          className="text-md hover:text-primary transition font-medium"
+          className="text-md font-medium hover:text-primary transition"
           href="#partners"
         >
           {" "}

@@ -6,7 +6,6 @@ import CarouselItem from "../CarouselItem";
 
 interface Props {
   onRegister: () => void;
-  onBook: () => void;
   onScrollToPartners: () => void;
 }
 
@@ -22,11 +21,9 @@ const EVENT_DATE = new Date("2025-12-08T09:00:00");
 
 const SecondEditionHero: React.FC<Props> = ({
   onRegister,
-  onBook,
   onScrollToPartners,
 }) => {
   const { t, i18n } = useTranslation();
-  const [isMobile, setIsMobile] = useState(false);
   const [countdown, setCountdown] = useState<Countdown>({
     days: "0",
     hours: "0",
@@ -34,14 +31,6 @@ const SecondEditionHero: React.FC<Props> = ({
     seconds: "0",
     label: "",
   });
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const updateBreakPoint = () => setIsMobile(window.innerWidth < 768);
-    updateBreakPoint();
-    window.addEventListener("resize", updateBreakPoint);
-    return () => window.removeEventListener("resize", updateBreakPoint);
-  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -73,8 +62,8 @@ const SecondEditionHero: React.FC<Props> = ({
     return () => clearInterval(interval);
   }, []);
 
-  const carouselItems = useMemo(() => {
-    const baseItems = [
+  const ITEMS = useMemo(() => {
+    return [
       {
         left: (
           <div className="flex w-full flex-col md:w-4/6 animate-fade-in">
@@ -97,7 +86,7 @@ const SecondEditionHero: React.FC<Props> = ({
               >
                 {i18n.language === "fr"
                   ? "Obtenez Votre Badge"
-                  : t("Participate")}
+                  : `${t("Participate")}`}
               </Button>
               <Button
                 onClick={onScrollToPartners}
@@ -120,9 +109,7 @@ const SecondEditionHero: React.FC<Props> = ({
             <h1 className="text-5xl md:text-6xl text-left font-bold text-white">
               {t("slide2Head")}
             </h1>
-            <span className="my-6 text-left text-white">
-              {t("slide2Body")}
-            </span>
+            <span className="my-6 text-left text-white">{t("slide2Body")}</span>
           </div>
         ),
       },
@@ -132,9 +119,7 @@ const SecondEditionHero: React.FC<Props> = ({
             <h1 className="text-5xl md:text-6xl text-left font-bold text-white">
               {t("slide3Head")}
             </h1>
-            <span className="my-6 text-left text-white">
-              {t("slide3Body")}
-            </span>
+            <span className="my-6 text-left text-white">{t("slide3Body")}</span>
           </div>
         ),
       },
@@ -166,9 +151,7 @@ const SecondEditionHero: React.FC<Props> = ({
         ),
       },
     ];
-
-    return isMobile ? baseItems.slice(0, 1) : baseItems;
-  }, [isMobile, i18n.language, onRegister, onScrollToPartners, t]);
+  }, [i18n.language, onRegister, onScrollToPartners, t]);
 
   return (
     <div className="min-h-screen flex flex-col relative" id="top">
@@ -190,7 +173,10 @@ const SecondEditionHero: React.FC<Props> = ({
         infiniteLoop
         className="flex flex-col w-full min-h-[50vh] md:min-h-[80vh] justify-start text-start z-10"
       >
-        {carouselItems.map((item, index) => (
+        {(typeof window !== "undefined" && window.innerWidth < 768
+          ? ITEMS.slice(0, 1)
+          : ITEMS
+        ).map((item, index) => (
           <CarouselItem key={index} item={item} ind={index} />
         ))}
       </Carousel>
