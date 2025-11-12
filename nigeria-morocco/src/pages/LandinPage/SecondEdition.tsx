@@ -12,6 +12,7 @@ import SecondEditionNews from "./components/secondEdition/SecondEditionNews";
 import SecondEditionTestimonials from "./components/secondEdition/SecondEditionTestimonials";
 import SecondEditionFAQ from "./components/secondEdition/SecondEditionFAQ";
 import SecondEditionNavBar from "./components/secondEdition/SecondEditionNavBar";
+import ConceptNote from "./components/secondEdition/ConceptNote";
 
 export default function SecondEdition() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,6 +36,7 @@ export default function SecondEdition() {
         onRegister={() => setIsModalOpen(true)}
         onScrollToPartners={handleScrollToPartners}
       />
+      <ConceptNote />
 
       <SecondEditionPartners ref={partnersRef} />
       <SecondEditionPrograms />
