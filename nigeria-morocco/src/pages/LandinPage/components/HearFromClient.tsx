@@ -1,43 +1,67 @@
+import { useTranslation } from "react-i18next";
+import { useMemo } from "react";
 
 export default function TestimonialsSection() {
-  const testimonials = [
-    {
-      quote: "A truly world-class event. The networking opportunities were amazing!",
-      name: "Amina S.",
-      location: "Lagos",
-      avatar: "profile.svg"
-    },
-    {
-      quote: "We found new partners and clients. Highly recommended for any business.",
-      name: "Youssef M.",
-      location: "Casablanca",
-       avatar: "profile.svg"
-    },
-    {
-      quote: "Excellent organization and great speakers. Looking forward to next year!",
-      name: "Oluwade O.",
-      location: "Abuja",
-      avatar: "profile.svg"
-    },
-    {
-      quote: "A truly world-class event. The networking opportunities were amazing!",
-      name: "Amina S.",
-      location: "Lagos",
-      avatar: "profile.svg"
-    },
-    {
-      quote: "We found new partners and clients. Highly recommended for any business.",
-      name: "Youssef M.",
-      location: "Casablanca",
-    avatar: "profile.svg"
-    },
-    {
-      quote: "Excellent organization and great speakers. Looking forward to next year!",
-      name: "Oluwade O.",
-      location: "Abuja",
-     avatar: "profile.svg"
-    }
-  ];
+  const { t } = useTranslation();
+  const testimonials = useMemo(
+    () => [
+      {
+        quote: t("testimonial1", {
+          defaultValue:
+            "A truly world-class event. The networking opportunities were amazing!",
+        }),
+        name: "Amina S.",
+        location: "Lagos",
+        avatar: "profile.svg",
+      },
+      {
+        quote: t("testimonial2", {
+          defaultValue:
+            "We found new partners and clients. Highly recommended for any business.",
+        }),
+        name: "Youssef M.",
+        location: "Casablanca",
+        avatar: "profile.svg",
+      },
+      {
+        quote: t("testimonial3", {
+          defaultValue:
+            "Excellent organization and great speakers. Looking forward to next year!",
+        }),
+        name: "Oluwade O.",
+        location: "Abuja",
+        avatar: "profile.svg",
+      },
+      {
+        quote: t("testimonial1", {
+          defaultValue:
+            "A truly world-class event. The networking opportunities were amazing!",
+        }),
+        name: "Amina S.",
+        location: "Lagos",
+        avatar: "profile.svg",
+      },
+      {
+        quote: t("testimonial2", {
+          defaultValue:
+            "We found new partners and clients. Highly recommended for any business.",
+        }),
+        name: "Youssef M.",
+        location: "Casablanca",
+        avatar: "profile.svg",
+      },
+      {
+        quote: t("testimonial3", {
+          defaultValue:
+            "Excellent organization and great speakers. Looking forward to next year!",
+        }),
+        name: "Oluwade O.",
+        location: "Abuja",
+        avatar: "profile.svg",
+      },
+    ],
+    [t]
+  );
 
   return (
     <div className="w-full bg-[#F5F5F5] py-16 px-4">
@@ -45,10 +69,10 @@ export default function TestimonialsSection() {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-2">
-            Hear from Clients
+            {t("HearFromClients", { defaultValue: "Hear from Clients" })}
           </h2>
           <p className="text-3xl font-bold text-gray-900">
-            That Trust Us
+            {t("ThatTrustUs", { defaultValue: "That Trust Us" })}
           </p>
         </div>
 
@@ -61,7 +85,7 @@ export default function TestimonialsSection() {
             >
               {/* Quote Icon */}
               <div className="mb-4">
-               <img src='quoteup.svg' alt="" />
+                <img src="quoteup.svg" alt="" />
               </div>
 
               {/* Quote Text */}

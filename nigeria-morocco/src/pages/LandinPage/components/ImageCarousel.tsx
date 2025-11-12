@@ -65,8 +65,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={1}
-          onDragEnd={(e: any, { offset, velocity }: any) => {
-            console.log(e);
+          onDragEnd={(_e: any, { offset, velocity }: any) => {
             const swipe = swipePower(offset.x, velocity.x);
 
             if (swipe < -swipeConfidenceThreshold) {

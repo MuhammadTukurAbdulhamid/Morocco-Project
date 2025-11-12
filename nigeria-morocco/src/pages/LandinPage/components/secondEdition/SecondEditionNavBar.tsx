@@ -49,21 +49,21 @@ const SecondEditionNavBar: React.FC<Props> = ({ onRegister, onBook }) => {
       <h1 className="text-xl md:text-2xl font-bold text-primary drop-shadow">
         🇳🇬 NIGERIA-MOROCCO 🇲🇦
       </h1>
-      <div className="hidden md:flex items-center space-x-8">
+      <div className="hidden md:flex items-center space-x-3 lg:space-x-4 xl:space-x-6 flex-wrap md:flex-nowrap">
         <a
-          className="text-md font-medium hover:text-primary transition"
+          className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="#top"
         >
           {t("Home")}
         </a>
         <a
-          className="text-md font-medium hover:text-primary transition"
+          className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="#partners"
         >
           {t("Sponsors")}
         </a>
         <a
-          className="text-md font-medium hover:text-primary transition"
+          className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="/"
         >
           {t("firstEditionLink", { defaultValue: "1st Edition" })}
@@ -75,17 +75,19 @@ const SecondEditionNavBar: React.FC<Props> = ({ onRegister, onBook }) => {
             e.preventDefault();
             onBook();
           }}
-          className="h-[40px] hover:scale-105 transition"
+          className="h-[40px] text-[12px] lg:text-sm hover:scale-105 transition whitespace-nowrap"
         >
           {i18n.language === "fr"
-            ? "Obtenez Votre Stand/Espace"
+            ? t("bookButtton", { defaultValue: "Obtenez Votre Stand/Espace" })
             : t("bookButtton")}
         </Button>
         <Button
           onClick={onRegister}
-          className="bg-primary w-[115px] h-[40px] text-white hover:scale-105 transition"
+          className="bg-primary min-w-[115px] h-[40px] text-[12px] lg:text-sm text-white hover:scale-105 transition whitespace-nowrap"
         >
-          {i18n.language === "fr" ? "Obtenez Votre Badge" : t("Participate")}
+          {i18n.language === "fr"
+            ? t("Participate", { defaultValue: "Obtenez Votre Badge" })
+            : t("Participate")}
         </Button>
         <Dropdown menu={{ items }}>
           <a className="cursor-pointer" onClick={(e) => e.preventDefault()}>
@@ -111,7 +113,11 @@ const SecondEditionNavBar: React.FC<Props> = ({ onRegister, onBook }) => {
         </div>
       </div>
 
-      <Drawer title="Menu" onClose={onClose} open={open}>
+      <Drawer
+        title={t("Menu", { defaultValue: "Menu" })}
+        onClose={onClose}
+        open={open}
+      >
         <div className="flex flex-col items-center gap-[20px]">
           <a
             onClick={onClose}

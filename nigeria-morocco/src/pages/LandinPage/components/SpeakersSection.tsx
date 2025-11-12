@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Carousel } from "react-responsive-carousel";
+import { useTranslation } from "react-i18next";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 interface Speaker {
@@ -13,64 +14,88 @@ interface Speaker {
 }
 
 const SpeakersSection: React.FC = () => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("confirmed");
   const [itemsPerSlide, setItemsPerSlide] = useState(3);
 
-  const confirmedSpeakers: Speaker[] = [
-    {
-      id: 1,
-      name: "H.E. Uba Ahmadu Maigari",
-      title:
-        "Delivering His Keynote Address Honorable Minister Federal Republic of Nigeria.",
-      image: "/achievements/b2b-1.jpg",
-    },
-    {
-      id: 2,
-      name: "H.E. AMB Usman Sarki",
-      title: "Delivering welcome Address Chairman Organizing Committee",
-      image: "/achievements/b2b-2.jpg",
-    },
-    {
-      id: 3,
-      name: "Malam Abdullahi Naziru",
-      title:
-        "Executive Vice President KK Kingdom Group delivering a presentation about Green Economic Zone Kaduna",
-      organization: "Federal Institute of Agriculture, Abuja",
-      image: "speaker-abdullahi-naziru.jpeg",
-    },
-    {
-      id: 4,
-      name: "Mr. Tarik Bourqouqou",
-      title: "Manager Intl. Projects MASEN",
-      image: "speaker-tarik.jpeg",
-    },
-    {
-      id: 5,
-      name: "Mr. Oluwemimo Joseph Osanipin",
-      title:
-        "Director-General National Automotive Design & Development Council",
-      image: "speaker-oluwamilo.jpeg",
-    },
-  ];
+  const confirmedSpeakers: Speaker[] = useMemo(
+    () => [
+      {
+        id: 1,
+        name: "H.E. Uba Ahmadu Maigari",
+        title: t("speaker1Title", {
+          defaultValue:
+            "Delivering His Keynote Address Honorable Minister Federal Republic of Nigeria.",
+        }),
+        image: "/achievements/b2b-1.jpg",
+      },
+      {
+        id: 2,
+        name: "H.E. AMB Usman Sarki",
+        title: t("speaker2Title", {
+          defaultValue:
+            "Delivering welcome Address Chairman Organizing Committee",
+        }),
+        image: "/achievements/b2b-2.jpg",
+      },
+      {
+        id: 3,
+        name: "Malam Abdullahi Naziru",
+        title: t("speaker3Title", {
+          defaultValue:
+            "Executive Vice President KK Kingdom Group delivering a presentation about Green Economic Zone Kaduna",
+        }),
+        organization: t("speaker3Organization", {
+          defaultValue: "Federal Institute of Agriculture, Abuja",
+        }),
+        image: "speaker-abdullahi-naziru.jpeg",
+      },
+      {
+        id: 4,
+        name: "Mr. Tarik Bourqouqou",
+        title: t("speaker4Title", {
+          defaultValue: "Manager Intl. Projects MASEN",
+        }),
+        image: "speaker-tarik.jpeg",
+      },
+      {
+        id: 5,
+        name: "Mr. Oluwemimo Joseph Osanipin",
+        title: t("speaker5Title", {
+          defaultValue:
+            "Director-General National Automotive Design & Development Council",
+        }),
+        image: "speaker-oluwamilo.jpeg",
+      },
+    ],
+    [t]
+  );
 
-  const pastSpeakers: Speaker[] = [
-    {
-      id: 4,
-      name: "Jane Smith",
-      title: "Director",
-      organization: "National Research Institute",
-      image:
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop",
-    },
-    {
-      id: 5,
-      name: "Michael Brown",
-      title: "Professor",
-      organization: "University of Agriculture",
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
-    },
-  ];
+  const pastSpeakers: Speaker[] = useMemo(
+    () => [
+      {
+        id: 4,
+        name: "Jane Smith",
+        title: t("Director", { defaultValue: "Director" }),
+        organization: t("pastSpeakerOrganization1", {
+          defaultValue: "National Research Institute",
+        }),
+        image:
+          "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop",
+      },
+      {
+        id: 5,
+        name: "Michael Brown",
+        title: t("Professor", { defaultValue: "Professor" }),
+        organization: t("pastSpeakerOrganization2", {
+          defaultValue: "University of Agriculture",
+        }),
+        image:
+          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
+      },
+    ],
+    [t]
+  );
 
   const displaySpeakers =
     activeTab === "confirmed" ? confirmedSpeakers : pastSpeakers;
@@ -101,10 +126,12 @@ const SpeakersSection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
-            Speakers
+            {t("Speakers", { defaultValue: "Speakers" })}
           </h1>
           <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
-            View list of present and past event speakers
+            {t("speakersDescription", {
+              defaultValue: "View list of present and past event speakers",
+            })}
           </p>
         </div>
 
@@ -117,7 +144,7 @@ const SpeakersSection: React.FC = () => {
                 : "bg-white text-gray-700 border-2 border-gray-300 hover:border-primary hover:bg-gray-50"
             }`}
           >
-            Confirmed Speakers
+            {t("ConfirmedSpeakers", { defaultValue: "Confirmed Speakers" })}
           </button>
         </div>
 
@@ -139,7 +166,9 @@ const SpeakersSection: React.FC = () => {
                 <button
                   onClick={onClickHandler}
                   className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white rounded-full p-3 border-2 border-gray-200 hover:border-primary transition-all hover:scale-110"
-                  aria-label="Previous speakers"
+                  aria-label={t("PreviousSpeakers", {
+                    defaultValue: "Previous speakers",
+                  })}
                 >
                   <svg
                     className="w-6 h-6 text-gray-800"
@@ -162,7 +191,9 @@ const SpeakersSection: React.FC = () => {
                 <button
                   onClick={onClickHandler}
                   className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white rounded-full p-3 border-2 border-gray-200 hover:border-primary transition-all hover:scale-110"
-                  aria-label="Next speakers"
+                  aria-label={t("NextSpeakers", {
+                    defaultValue: "Next speakers",
+                  })}
                 >
                   <svg
                     className="w-6 h-6 text-gray-800"

@@ -45,10 +45,10 @@ const SecondEditionPartners = forwardRef<HTMLDivElement>((_, ref) => {
       id="partners"
       className="flex flex-col items-center p-10 pb-20 bg-gradient-to-br from-white via-blue-50 to-silver/30 rounded-2xl shadow-lg mx-2 md:mx-20 my-10"
     >
-      <h1 className="text-2xl text-fontColor font-[700] mb-6 tracking-wide uppercase letter-spacing-2">
+      {/* <h1 className="text-2xl text-fontColor font-[700] mb-6 tracking-wide uppercase letter-spacing-2">
         {t("Partners")}
-      </h1>
-      <p className="uppercase text-primary font-semibold mb-2 text-center text-sm md:text-base tracking-wider">
+      </h1> */}
+      <p className="uppercase text-primary font-[700] mb-2 text-center text-2xl md:text-base tracking-wider">
         Under the Auspices of the Nigeria Embassy Rabat
       </p>
       <div className="flex justify-center items-center mb-6 w-full">

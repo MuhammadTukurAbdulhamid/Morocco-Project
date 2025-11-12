@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import useFetchNews, { NewsItem } from "../hooks/useFetchNews";
 
 const FALLBACK_FEATURES: NewsItem[] = [
@@ -63,6 +64,7 @@ const FALLBACK_ARTICLES: NewsItem[] = [
 ];
 
 export default function NewsUpdates() {
+  const { t, i18n } = useTranslation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { news, loading, error } = useFetchNews();
 
@@ -98,11 +100,14 @@ export default function NewsUpdates() {
   const formatDate = (value?: string) => {
     if (!value) return "";
     try {
-      return new Date(value).toLocaleDateString("en-GB", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      });
+      return new Date(value).toLocaleDateString(
+        i18n.language === "fr" ? "fr-FR" : "en-GB",
+        {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        }
+      );
     } catch {
       return "";
     }
@@ -112,27 +117,35 @@ export default function NewsUpdates() {
     <div className="w-full bg-white">
       <div className="max-w-7xl mx-auto px-5 md:px-10 py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Updates and News
+          {t("UpdatesAndNews", { defaultValue: "Updates and News" })}
         </h1>
         <p className="text-sm text-gray-600">
-          Look at posts gallery or shop website from a welder and gas merlin.
+          {t("newsDescription", {
+            defaultValue:
+              "Look at posts gallery or shop website from a welder and gas merlin.",
+          })}
         </p>
       </div>
 
       <div className="max-w-7xl mx-auto px-5 md:px-10 mb-12">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">
-          First Edition of The Nigeria – Morocco Business Week Report
+          {t("FirstEditionReport", {
+            defaultValue:
+              "First Edition of The Nigeria – Morocco Business Week Report",
+          })}
         </h2>
 
         <div className="relative w-full rounded-lg overflow-hidden shadow-lg group min-h-[240px] flex items-center justify-center bg-gray-100">
           {loading && (
             <div className="py-20 text-gray-500 text-sm">
-              Loading highlights…
+              {t("LoadingHighlights", { defaultValue: "Loading highlights…" })}
             </div>
           )}
           {!loading && !activeCarouselItem && (
             <div className="py-16 text-gray-500 text-sm text-center">
-              News will appear here once published.
+              {t("NewsWillAppear", {
+                defaultValue: "News will appear here once published.",
+              })}
             </div>
           )}
           {!loading && activeCarouselItem && (
@@ -157,7 +170,7 @@ export default function NewsUpdates() {
                   </span>
                   {activeCarouselItem.tags?.includes("featured") && (
                     <span className="bg-primary text-white rounded-full text-xs uppercase tracking-wide px-3 py-1">
-                      Featured
+                      {t("Featured", { defaultValue: "Featured" })}
                     </span>
                   )}
                 </div>
@@ -179,7 +192,7 @@ export default function NewsUpdates() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center mb-3 gap-2 text-sm text-white/90 hover:text-white underline-offset-2"
                   >
-                    View resource
+                    {t("ViewResource", { defaultValue: "View resource" })}
                     <svg
                       className="w-4 h-4"
                       fill="none"
@@ -204,7 +217,9 @@ export default function NewsUpdates() {
               <button
                 onClick={handlePrevious}
                 className="w-10 h-10 rounded-full bg-white/30 hover:bg-white/50 backdrop-blur-sm flex items-center justify-center text-white transition-all"
-                aria-label="Previous image"
+                aria-label={t("PreviousImage", {
+                  defaultValue: "Previous image",
+                })}
               >
                 <svg
                   className="w-5 h-5"
@@ -223,7 +238,7 @@ export default function NewsUpdates() {
               <button
                 onClick={handleNext}
                 className="w-10 h-10 rounded-full bg-white/30 hover:bg-white/50 backdrop-blur-sm flex items-center justify-center text-white transition-all"
-                aria-label="Next image"
+                aria-label={t("NextImage", { defaultValue: "Next image" })}
               >
                 <svg
                   className="w-5 h-5"
@@ -254,7 +269,9 @@ export default function NewsUpdates() {
                       ? "bg-white w-6"
                       : "bg-white/40 hover:bg-white/70"
                   }`}
-                  aria-label={`Go to slide ${index + 1}`}
+                  aria-label={t("GoToSlide", {
+                    defaultValue: `Go to slide ${index + 1}`,
+                  })}
                 />
               ))}
             </div>
@@ -264,7 +281,7 @@ export default function NewsUpdates() {
 
       <div className="max-w-7xl mx-auto px-5 md:px-10 pb-16">
         <h2 className="text-lg font-semibold text-gray-900 mb-6">
-          Related articles or posts
+          {t("RelatedArticles", { defaultValue: "Related articles or posts" })}
         </h2>
 
         {error && <div className="text-sm text-red-600 mb-4">{error}</div>}
@@ -315,8 +332,10 @@ export default function NewsUpdates() {
 
         {!loading && articles.length === 0 && features.length === 0 && (
           <div className="text-sm text-gray-500">
-            We will share videos, interviews and articles here once they are
-            published.
+            {t("ContentWillBeShared", {
+              defaultValue:
+                "We will share videos, interviews and articles here once they are published.",
+            })}
           </div>
         )}
       </div>

@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import { motion, useInView } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import ImageCarousel from "./ImageCarousel";
 
 interface AchievementImage {
@@ -21,6 +22,7 @@ interface AchievementData {
 }
 
 const AchievementsSection: React.FC = () => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("highlights");
   const highlightsRef = useRef<HTMLDivElement>(null);
   const exhibitionRef = useRef<HTMLDivElement>(null);
@@ -31,135 +33,270 @@ const AchievementsSection: React.FC = () => {
 
   const headerInView = useInView(headerRef, { once: true, amount: 0.3 });
 
-  const achievementsData: Record<string, AchievementData> = {
-    highlights: {
-      id: "highlights",
-      title: "Event Highlights",
-      description:
-        "Report of The First Edition of The Nigeria – Morocco Business Week",
-      date: "28th October – 1st November 2024",
-      venue: "Sofitel Hotel, Casablanca, Morocco",
-      images: [
-        { src: "/achievements/panel-session-4.jpeg", alt: "Panel Session 3" },
-        { src: "/achievements/highlights-1.jpg", alt: "Event Highlights 1" },
-        { src: "/achievements/highlights-2.jpg", alt: "Event Highlights 2" },
-        { src: "/achievements/highlights-3.jpg", alt: "Event Highlights 3" },
-        { src: "/achievements/highlights-5.jpg", alt: "Event Highlights 5" },
-        { src: "/achievements/highlights-6.jpeg", alt: "Event Highlights 6" },
-        { src: "/achievements/highlights-7.jpeg", alt: "Event Highlights 7" },
-        { src: "/achievements/highlights-8.jpeg", alt: "Event Highlights 8" },
-        { src: "/achievements/highlights-9.jpeg", alt: "Event Highlights 9" },
-      ],
-      content: [
-        "First Edition",
-        "Main Organizers: Spectre Trans-Trade Global",
-        "Organization Partner for Event Center: Ridec Design Company",
-        "Under the Auspices of the Nigeria Embassy in Rabat",
-        "Institutional Partners: Federal Ministry of Industry, Trade & Investment Nigeria, Ministry of Steel Development Nigeria, AMDIE Morocco, National Automotive Design & Development Council Nigeria, Jigawa State Government, Coalition of Northern States Chambers of Commerce Mines, Industry & Agriculture, Casablanca – Settat Chamber of Commerce, Royal Air Morocco, Highland Integrated Electricity Services Ltd & Jos Electricity Distribution",
-      ],
-      highlights: [
-        "Deepen bilateral trade and commercial relations",
-        "Explore investment and partnership opportunities across key sectors: Steel & Metallurgy, Renewable Energy & Electricity, Agriculture & Agro-business, Automotive Industry, Health, Banking & Finance, Solid Minerals & Fertilizer",
-        "Seminars/Panel Sessions on policy, regulatory frameworks, and investment opportunities",
-        "Factory and Site Visits to industrial facilities",
-      ],
-    },
-    exhibition: {
-      id: "exhibition",
-      title: "Exhibition",
-      description: "Showcasing key industries from Nigeria and Morocco",
-      images: [
-        { src: "/achievements/exhibition-1.jpg", alt: "Exhibition Stand 1" },
-        { src: "/achievements/exhibition-2.jpg", alt: "Exhibition Stand 2" },
-        { src: "/achievements/exhibition-3.jpg", alt: "Products Exhibition" },
-        { src: "/achievements/exhibition-4.jpg", alt: "Jigawa State Stand" },
-        {
-          src: "/achievements/exhibition-5.jpg",
-          alt: "Highland Integrated Stand",
-        },
-      ],
-      content: [
-        "Exhibitions showcasing key industries such as agriculture, energy, and steel",
-        "Jigawa State Government at their stand",
-        "Highland Integrated Electricity Services Ltd exhibition",
-        "Farm Creeds Nig. Ltd explaining products to visitors",
-        "National Automotive Design & Development Council products display",
-      ],
-    },
-    b2b: {
-      id: "b2b",
-      title: "B2B Meetings",
-      description:
-        "Business-to-Business meetings facilitating direct partnerships",
-      images: [
-        { src: "/achievements/b2b-1.jpg", alt: "B2B Meeting 1" },
-        { src: "/achievements/b2b-2.jpg", alt: "B2B Meeting 2" },
-        { src: "/achievements/b2b-3.jpg", alt: "B2B Meeting 3" },
-        { src: "/achievements/b2b-4.jpg", alt: "B2B Meeting 4" },
-        { src: "/achievements/b2b-5.jpg", alt: "B2B Meeting 5" },
-        { src: "/achievements/b2b-6.jpg", alt: "B2B Meeting 6" },
-      ],
-      content: [
-        "Nigerian and Moroccan firms held over 30 B2B meetings",
-        "Site visits to factories including OCP, EMOVE, Maghreb Steel, Cherradi Group, and Lesieur Oil",
-        "Hasha Nig. Ltd having B2B with a Moroccan Energy Company",
-        "Farm Creeds Nig. Ltd having B2B with Moroccan participants",
-        "Highland Integrated Services and MASEN initiated discussions on embedded power generation, solar panel and lithium battery production",
-        "Visit to Lesieur Oil Company with Chairman organizing Committee Amb. Usman Sarki",
-        "Meeting at ONHYM with Mrs. Amina Benkhadra and the Hon. Minister H.E Uba Ahmadu Maigari",
-        "NADDC Director-General's Visit to Emove Company",
-        "Closed-Door Roundtable Discussion addressing regulatory challenges and solutions to facilitate trade",
-      ],
-    },
-    mou: {
-      id: "mou",
-      title: "SIGNED MOU",
-      description: "Memoranda of Understanding signed during the event",
-      images: [
-        { src: "/achievements/mou-1.jpg", alt: "MOU Signing Ceremony" },
-        { src: "/achievements/mou-2.jpg", alt: "MOU Document" },
-        { src: "/achievements/mou-3.jpg", alt: "MOU Signing 2" },
-      ],
-      content: [
-        "Maghreb Steel & Niger Extraction Company: To establish a scrap metal collection centre in Niger State, Nigeria for exports to Maghreb steel in Morocco. Witnessed by H.E Uba Ahmadu Maigari, The Charge d'Affairs Mr. Adamu Salihu Zanuwa, and directors from the Ministry of Steel Development",
-        "NADDC & EMOVE: Ongoing talks for electric vehicle battery production partnership",
-        "Nigeria-Morocco Steel Day: To be hosted alternately in both countries to strengthen ties in the steel sector",
-        "Lagos–Casablanca Sea Lane: Agreement to pursue direct sea trade to reduce transit time and bypass intermediaries",
-        "Greenhouse Project: Nigeria presented a plan to repurpose abandoned vessels into greenhouse farms, seeking Moroccan collaboration",
-        "Energy & Solar Cooperation: Highland Integrated Services and MASEN initiated discussions on embedded power generation, solar panel and lithium battery production",
-        "Agricultural Trade & Investment: Moroccan firms expressed interest in importing Nigerian soybeans, sesame, garlic, ginger, etc. Nigerian firms showed interest in Moroccan fruits, canned fish, argan oil, etc.",
-        "Nigeria-Morocco Economic Forum: Proposal to create a formal joint business forum and initiate bi-monthly virtual follow-up meetings",
-      ],
-    },
-    panelSession: {
-      id: "panelSession",
-      title: "Panel Sessions",
-      description:
-        "Seminars and panel discussions on policy, regulatory frameworks, and investment opportunities",
-      images: [
-        { src: "/achievements/panel-session-1.jpeg", alt: "Panel Session 1" },
-        { src: "/achievements/panel-session-2.jpeg", alt: "Panel Session 2" },
-        { src: "/achievements/panel-session-3.jpeg", alt: "Panel Session 3" },
-        { src: "/achievements/panel-session-4.jpeg", alt: "Panel Session 3" },
-      ],
-      content: [
-        "Panel Sessions on the regulatory environment, AfCFTA, and bilateral trade opportunities in sectors like agriculture, automotive, solid minerals, and steel",
-        "The Role of Chambers of Commerce in enhancing economic relations between Nigeria and Morocco",
-        "Panel Session on Energy, Steel & Solid Minerals with key stakeholders from both countries",
-        "Closed-Door Roundtable Discussion addressing regulatory challenges and solutions to facilitate trade",
-        "High-level discussions on policy frameworks and investment opportunities",
-      ],
-      useCarousel: true,
-    },
-  };
+  const achievementsData: Record<string, AchievementData> = useMemo(
+    () => ({
+      highlights: {
+        id: "highlights",
+        title: t("EventHighlights", { defaultValue: "Event Highlights" }),
+        description: t("firstEditionReport", {
+          defaultValue:
+            "Report of The First Edition of The Nigeria – Morocco Business Week",
+        }),
+        date: "28th October – 1st November 2024",
+        venue: "Sofitel Hotel, Casablanca, Morocco",
+        images: [
+          { src: "/achievements/panel-session-4.jpeg", alt: "Panel Session 3" },
+          { src: "/achievements/highlights-1.jpg", alt: "Event Highlights 1" },
+          { src: "/achievements/highlights-2.jpg", alt: "Event Highlights 2" },
+          { src: "/achievements/highlights-3.jpg", alt: "Event Highlights 3" },
+          { src: "/achievements/highlights-5.jpg", alt: "Event Highlights 5" },
+          { src: "/achievements/highlights-6.jpeg", alt: "Event Highlights 6" },
+          { src: "/achievements/highlights-7.jpeg", alt: "Event Highlights 7" },
+          { src: "/achievements/highlights-8.jpeg", alt: "Event Highlights 8" },
+          { src: "/achievements/highlights-9.jpeg", alt: "Event Highlights 9" },
+        ],
+        content: [
+          t("firstEdition", { defaultValue: "First Edition" }),
+          t("mainOrganizers", {
+            defaultValue: "Main Organizers: Spectre Trans-Trade Global",
+          }),
+          t("organizationPartner", {
+            defaultValue:
+              "Organization Partner for Event Center: Ridec Design Company",
+          }),
+          t("underAuspices", {
+            defaultValue: "Under the Auspices of the Nigeria Embassy in Rabat",
+          }),
+          t("institutionalPartners", {
+            defaultValue:
+              "Institutional Partners: Federal Ministry of Industry, Trade & Investment Nigeria, Ministry of Steel Development Nigeria, AMDIE Morocco, National Automotive Design & Development Council Nigeria, Jigawa State Government, Coalition of Northern States Chambers of Commerce Mines, Industry & Agriculture, Casablanca – Settat Chamber of Commerce, Royal Air Morocco, Highland Integrated Electricity Services Ltd & Jos Electricity Distribution",
+          }),
+        ],
+        highlights: [
+          t("deepenBilateralTrade", {
+            defaultValue: "Deepen bilateral trade and commercial relations",
+          }),
+          t("exploreInvestment", {
+            defaultValue:
+              "Explore investment and partnership opportunities across key sectors: Steel & Metallurgy, Renewable Energy & Electricity, Agriculture & Agro-business, Automotive Industry, Health, Banking & Finance, Solid Minerals & Fertilizer",
+          }),
+          t("seminarsPanelSessions", {
+            defaultValue:
+              "Seminars/Panel Sessions on policy, regulatory frameworks, and investment opportunities",
+          }),
+          t("factorySiteVisits", {
+            defaultValue: "Factory and Site Visits to industrial facilities",
+          }),
+        ],
+      },
+      exhibition: {
+        id: "exhibition",
+        title: t("Exhibition", { defaultValue: "Exhibition" }),
+        description: t("exhibitionDescription", {
+          defaultValue: "Showcasing key industries from Nigeria and Morocco",
+        }),
+        images: [
+          { src: "/achievements/exhibition-1.jpg", alt: "Exhibition Stand 1" },
+          { src: "/achievements/exhibition-2.jpg", alt: "Exhibition Stand 2" },
+          { src: "/achievements/exhibition-3.jpg", alt: "Products Exhibition" },
+          { src: "/achievements/exhibition-4.jpg", alt: "Jigawa State Stand" },
+          {
+            src: "/achievements/exhibition-5.jpg",
+            alt: "Highland Integrated Stand",
+          },
+        ],
+        content: [
+          t("exhibitionsShowcasing", {
+            defaultValue:
+              "Exhibitions showcasing key industries such as agriculture, energy, and steel",
+          }),
+          t("jigawaStateStand", {
+            defaultValue: "Jigawa State Government at their stand",
+          }),
+          t("highlandIntegratedExhibition", {
+            defaultValue:
+              "Highland Integrated Electricity Services Ltd exhibition",
+          }),
+          t("farmCreedsExhibition", {
+            defaultValue:
+              "Farm Creeds Nig. Ltd explaining products to visitors",
+          }),
+          t("naddcProductsDisplay", {
+            defaultValue:
+              "National Automotive Design & Development Council products display",
+          }),
+        ],
+      },
+      b2b: {
+        id: "b2b",
+        title: t("B2BMeetings", { defaultValue: "B2B Meetings" }),
+        description: t("b2bDescription", {
+          defaultValue:
+            "Business-to-Business meetings facilitating direct partnerships",
+        }),
+        images: [
+          { src: "/achievements/b2b-1.jpg", alt: "B2B Meeting 1" },
+          { src: "/achievements/b2b-2.jpg", alt: "B2B Meeting 2" },
+          { src: "/achievements/b2b-3.jpg", alt: "B2B Meeting 3" },
+          { src: "/achievements/b2b-4.jpg", alt: "B2B Meeting 4" },
+          { src: "/achievements/b2b-5.jpg", alt: "B2B Meeting 5" },
+          { src: "/achievements/b2b-6.jpg", alt: "B2B Meeting 6" },
+        ],
+        content: [
+          t("b2bMeetingsCount", {
+            defaultValue:
+              "Nigerian and Moroccan firms held over 30 B2B meetings",
+          }),
+          t("siteVisitsFactories", {
+            defaultValue:
+              "Site visits to factories including OCP, EMOVE, Maghreb Steel, Cherradi Group, and Lesieur Oil",
+          }),
+          t("hashaB2B", {
+            defaultValue:
+              "Hasha Nig. Ltd having B2B with a Moroccan Energy Company",
+          }),
+          t("farmCreedsB2B", {
+            defaultValue:
+              "Farm Creeds Nig. Ltd having B2B with Moroccan participants",
+          }),
+          t("highlandMASEN", {
+            defaultValue:
+              "Highland Integrated Services and MASEN initiated discussions on embedded power generation, solar panel and lithium battery production",
+          }),
+          t("lesieurOilVisit", {
+            defaultValue:
+              "Visit to Lesieur Oil Company with Chairman organizing Committee Amb. Usman Sarki",
+          }),
+          t("onhymMeeting", {
+            defaultValue:
+              "Meeting at ONHYM with Mrs. Amina Benkhadra and the Hon. Minister H.E Uba Ahmadu Maigari",
+          }),
+          t("naddcEmoveVisit", {
+            defaultValue: "NADDC Director-General's Visit to Emove Company",
+          }),
+          t("roundtableDiscussion", {
+            defaultValue:
+              "Closed-Door Roundtable Discussion addressing regulatory challenges and solutions to facilitate trade",
+          }),
+        ],
+      },
+      mou: {
+        id: "mou",
+        title: t("SignedMOU", { defaultValue: "SIGNED MOU" }),
+        description: t("mouDescription", {
+          defaultValue: "Memoranda of Understanding signed during the event",
+        }),
+        images: [
+          { src: "/achievements/mou-1.jpg", alt: "MOU Signing Ceremony" },
+          { src: "/achievements/mou-2.jpg", alt: "MOU Document" },
+          { src: "/achievements/mou-3.jpg", alt: "MOU Signing 2" },
+        ],
+        content: [
+          t("maghrebSteelMOU", {
+            defaultValue:
+              "Maghreb Steel & Niger Extraction Company: To establish a scrap metal collection centre in Niger State, Nigeria for exports to Maghreb steel in Morocco. Witnessed by H.E Uba Ahmadu Maigari, The Charge d'Affairs Mr. Adamu Salihu Zanuwa, and directors from the Ministry of Steel Development",
+          }),
+          t("naddcEmoveMOU", {
+            defaultValue:
+              "NADDC & EMOVE: Ongoing talks for electric vehicle battery production partnership",
+          }),
+          t("steelDayMOU", {
+            defaultValue:
+              "Nigeria-Morocco Steel Day: To be hosted alternately in both countries to strengthen ties in the steel sector",
+          }),
+          t("seaLaneMOU", {
+            defaultValue:
+              "Lagos–Casablanca Sea Lane: Agreement to pursue direct sea trade to reduce transit time and bypass intermediaries",
+          }),
+          t("greenhouseProjectMOU", {
+            defaultValue:
+              "Greenhouse Project: Nigeria presented a plan to repurpose abandoned vessels into greenhouse farms, seeking Moroccan collaboration",
+          }),
+          t("energySolarMOU", {
+            defaultValue:
+              "Energy & Solar Cooperation: Highland Integrated Services and MASEN initiated discussions on embedded power generation, solar panel and lithium battery production",
+          }),
+          t("agriculturalTradeMOU", {
+            defaultValue:
+              "Agricultural Trade & Investment: Moroccan firms expressed interest in importing Nigerian soybeans, sesame, garlic, ginger, etc. Nigerian firms showed interest in Moroccan fruits, canned fish, argan oil, etc.",
+          }),
+          t("economicForumMOU", {
+            defaultValue:
+              "Nigeria-Morocco Economic Forum: Proposal to create a formal joint business forum and initiate bi-monthly virtual follow-up meetings",
+          }),
+        ],
+      },
+      panelSession: {
+        id: "panelSession",
+        title: t("PanelSessions", { defaultValue: "Panel Sessions" }),
+        description: t("panelSessionsDescription", {
+          defaultValue:
+            "Seminars and panel discussions on policy, regulatory frameworks, and investment opportunities",
+        }),
+        images: [
+          { src: "/achievements/panel-session-1.jpeg", alt: "Panel Session 1" },
+          { src: "/achievements/panel-session-2.jpeg", alt: "Panel Session 2" },
+          { src: "/achievements/panel-session-3.jpeg", alt: "Panel Session 3" },
+          { src: "/achievements/panel-session-4.jpeg", alt: "Panel Session 3" },
+        ],
+        content: [
+          t("panelSessionsRegulatory", {
+            defaultValue:
+              "Panel Sessions on the regulatory environment, AfCFTA, and bilateral trade opportunities in sectors like agriculture, automotive, solid minerals, and steel",
+          }),
+          t("chambersOfCommerceRole", {
+            defaultValue:
+              "The Role of Chambers of Commerce in enhancing economic relations between Nigeria and Morocco",
+          }),
+          t("panelSessionEnergy", {
+            defaultValue:
+              "Panel Session on Energy, Steel & Solid Minerals with key stakeholders from both countries",
+          }),
+          t("roundtableDiscussionPanel", {
+            defaultValue:
+              "Closed-Door Roundtable Discussion addressing regulatory challenges and solutions to facilitate trade",
+          }),
+          t("highLevelDiscussions", {
+            defaultValue:
+              "High-level discussions on policy frameworks and investment opportunities",
+          }),
+        ],
+        useCarousel: true,
+      },
+    }),
+    [t]
+  );
 
-  const tabs = [
-    { id: "highlights", label: "Event Highlights", ref: highlightsRef },
-    { id: "exhibition", label: "Exhibition", ref: exhibitionRef },
-    { id: "b2b", label: "B2B Meeting", ref: b2bRef },
-    { id: "mou", label: "SIGNED MOU", ref: mouRef },
-    { id: "panelSession", label: "Panel Sessions", ref: panelSessionRef },
-  ];
+  const tabs = useMemo(
+    () => [
+      {
+        id: "highlights",
+        label: t("EventHighlights", { defaultValue: "Event Highlights" }),
+        ref: highlightsRef,
+      },
+      {
+        id: "exhibition",
+        label: t("Exhibition", { defaultValue: "Exhibition" }),
+        ref: exhibitionRef,
+      },
+      {
+        id: "b2b",
+        label: t("B2BMeeting", { defaultValue: "B2B Meeting" }),
+        ref: b2bRef,
+      },
+      {
+        id: "mou",
+        label: t("SignedMOU", { defaultValue: "SIGNED MOU" }),
+        ref: mouRef,
+      },
+      {
+        id: "panelSession",
+        label: t("PanelSessions", { defaultValue: "Panel Sessions" }),
+        ref: panelSessionRef,
+      },
+    ],
+    [t, highlightsRef, exhibitionRef, b2bRef, mouRef, panelSessionRef]
+  );
 
   const handleTabClick = (
     tabId: string,
@@ -225,12 +362,17 @@ const AchievementsSection: React.FC = () => {
             </p>
             {achievement.date && (
               <p className="text-md text-gray-700 mb-2">
-                <span className="font-semibold">Date:</span> {achievement.date}
+                <span className="font-semibold">
+                  {t("Date", { defaultValue: "Date" })}:
+                </span>{" "}
+                {achievement.date}
               </p>
             )}
             {achievement.venue && (
               <p className="text-md text-gray-700 mb-6">
-                <span className="font-semibold">Venue:</span>{" "}
+                <span className="font-semibold">
+                  {t("Venue", { defaultValue: "Venue" })}:
+                </span>{" "}
                 {achievement.venue}
               </p>
             )}
@@ -264,7 +406,7 @@ const AchievementsSection: React.FC = () => {
                     className="text-xl font-semibold text-gray-800 mb-4"
                     whileHover={{ scale: 1.05 }}
                   >
-                    Objectives
+                    {t("Objectives", { defaultValue: "Objectives" })}
                   </motion.h3>
                   {achievement.highlights.map((highlight, index) => (
                     <motion.div
@@ -353,7 +495,10 @@ const AchievementsSection: React.FC = () => {
             }
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            First Edition of The Nigeria – Morocco Business Week
+            {t("firstEditionTitle", {
+              defaultValue:
+                "First Edition of The Nigeria – Morocco Business Week",
+            })}
           </motion.h1>
           <motion.p
             className="text-lg text-gray-600 max-w-3xl mx-auto"
@@ -363,8 +508,10 @@ const AchievementsSection: React.FC = () => {
             }
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            Explore the highlights and outcomes from the First Edition of The
-            Nigeria – Morocco Business Week
+            {t("exploreHighlights", {
+              defaultValue:
+                "Explore the highlights and outcomes from the First Edition of The Nigeria – Morocco Business Week",
+            })}
           </motion.p>
         </div>
       </motion.div>

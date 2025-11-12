@@ -127,7 +127,10 @@ const NavBar: React.FC<Props> = ({
   };
 
   return (
-    <div className="nav sticky top-0 z-30 py-8 px-5 md:px-20 lg:px-30 min-h-20 p-0 bg-white backdrop-blur-md shadow-md flex items-center justify-between">
+    <div
+      key={`navbar-${i18n.language}`}
+      className="nav sticky top-0 z-30 py-8 px-5 md:px-20 lg:px-30 min-h-20 p-0 bg-white backdrop-blur-md shadow-md flex items-center justify-between"
+    >
       <div className="flex items-center justify-center gap-2 whitespace-nowrap">
         <img
           src="https://flagcdn.com/w40/ng.png"
@@ -146,78 +149,62 @@ const NavBar: React.FC<Props> = ({
         />
       </div>
 
-      <div className="hidden xl:flex items-center space-x-6 whitespace-nowrap">
+      <div className="hidden xl:flex items-center space-x-3 lg:space-x-4 xl:space-x-6 flex-wrap xl:flex-nowrap">
         <a
-          className="text-md font-medium hover:text-primary transition"
+          className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="/"
         >
-          {" "}
           {t("About")}
         </a>
         <a
-          className="text-md font-medium hover:text-primary transition"
+          className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="#partners"
         >
-          {" "}
-          {t("Sector")}{" "}
+          {t("Sector")}
         </a>
         <a
-          className="text-md font-medium hover:text-primary transition"
+          className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="#partners"
         >
-          {" "}
-          {t("Sponsors & Partner")}{" "}
+          {t("Sponsors & Partner")}
         </a>
         <a
-          className="text-md font-medium hover:text-primary transition"
+          className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="#partners"
         >
-          {" "}
-          {t("Updates")}{" "}
+          {t("Updates")}
         </a>
         <a
-          className="text-md font-medium hover:text-primary transition"
+          className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="#partners"
         >
-          {" "}
-          {t("Contact")}{" "}
+          {t("Contact")}
         </a>
         {renderEditionLinks("desktop")}
-        {i18n?.language === "fr" ? (
-          <>
-            <Button
-              type="primary"
-              ghost
-              onClick={(e) => {
-                e.preventDefault();
-                onBook();
-              }}
-              className="h-[40px] hover:scale-105 transition"
-            >
-              Obtenez Votre Stand/Espace
-            </Button>
-            <Button
-              onClick={onRegister}
-              className="bg-primary h-[40px] text-white hover:scale-105 transition"
-            >
-              Obtenez Votre Badge
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button
-              onClick={onRegister}
-              className="bg-primary px-6  h-[40px] text-white hover:scale-105 transition"
-            >
-              {t("Participate")}
-            </Button>
-          </>
-        )}
+        <Button
+          type="primary"
+          ghost
+          onClick={(e) => {
+            e.preventDefault();
+            onBook();
+          }}
+          className="h-[40px] text-[12px] lg:text-sm hover:scale-105 transition whitespace-nowrap"
+        >
+          {t("bookButtton", { defaultValue: "Book A Space" })}
+        </Button>
+        <Button
+          onClick={onRegister}
+          className="bg-primary px-6 h-[40px] text-[12px] lg:text-sm text-white hover:scale-105 transition whitespace-nowrap"
+        >
+          {t("Participate")}
+        </Button>
         <Dropdown menu={{ items }}>
           <a className="cursor-pointer" onClick={(e) => e.preventDefault()}>
             <Space>
               <p className="text-[10px]">
-                {i18n.language == "en" ? "English Language" : "French Language"}
+                {i18n.language == "en"
+                  ? t("EnglishLanguage", { defaultValue: "English Language" })
+                  : t("FrenchLanguage", { defaultValue: "French Language" })}
               </p>
               <GlobeIcon />
             </Space>
@@ -236,7 +223,11 @@ const NavBar: React.FC<Props> = ({
         </div>
       </div>
 
-      <Drawer title="Menu" onClose={onClose} open={open}>
+      <Drawer
+        title={t("Menu", { defaultValue: "Menu" })}
+        onClose={onClose}
+        open={open}
+      >
         <div className="flex flex-col items-center gap-[20px]">
           <a
             onClick={onClose}
@@ -255,47 +246,23 @@ const NavBar: React.FC<Props> = ({
           <div className="w-full flex flex-col gap-2">
             {renderEditionLinks("mobile")}
           </div>
-          {i18n?.language === "fr" ? (
-            <>
-              <Button
-                type="primary"
-                ghost
-                onClick={(e) => {
-                  e.preventDefault();
-                  onBook();
-                }}
-                className="w-full h-[40px]"
-              >
-                Obtenez Votre Stand/Espace
-              </Button>
-              <Button
-                onClick={onRegister}
-                className="bg-primary px-6 h-[40px] text-white"
-              >
-                Obtenez Votre Badge
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button
-                type="primary"
-                ghost
-                onClick={(e) => {
-                  e.preventDefault();
-                  onBook();
-                }}
-                className="w-full h-[40px]"
-              >
-                Book A Space
-              </Button>
-              <Button
-                onClick={onRegister}
-                className="bg-primary px-6 h-[40px] text-white"
-              >
-                Participate
-              </Button>
-            </>
-          )}
+          <Button
+            type="primary"
+            ghost
+            onClick={(e) => {
+              e.preventDefault();
+              onBook();
+            }}
+            className="w-full h-[40px]"
+          >
+            {t("bookButtton", { defaultValue: "Book A Space" })}
+          </Button>
+          <Button
+            onClick={onRegister}
+            className="bg-primary px-6 h-[40px] text-white"
+          >
+            {t("Participate")}
+          </Button>
         </div>
       </Drawer>
     </div>
