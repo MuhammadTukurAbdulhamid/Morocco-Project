@@ -80,7 +80,7 @@ export default function DashboardHome() {
       );
       const nigerians = data.filter((rec) => rec.mobile.startsWith("+234"));
       const moroccans = data.filter((rec) => !rec.mobile.startsWith("+234"));
-      setRevenue(generated.toLocaleString());
+      setRevenue(generated.toString());
       setNigeria(nigerians.length.toString());
       setMorocco(moroccans.length.toString());
     }
@@ -128,19 +128,19 @@ export default function DashboardHome() {
               {!loading && (
                 <>
                   <DashboardCard
-                    value={data.length.toString()}
+                    value={data.length}
                     color="#009a48bf"
                     label="Total Registered Participant"
                   />
                   <DashboardCard
-                    value2={morocco}
-                    value={nigeria}
+                    value2={parseInt(morocco) || 0}
+                    value={parseInt(nigeria) || 0}
                     label="Nigeria"
                     label2="Morocco"
                     color="#c1272cb8"
                   />
                   <DashboardCard
-                    value={`₦${revenue}`}
+                    value={revenue ? `₦${revenue}` : "₦0"}
                     label="Revenue Generated"
                     color="#2121219e"
                   />
