@@ -22,7 +22,19 @@ interface AchievementData {
 }
 
 const AchievementsSection: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  // Helper function to get translation with language-specific defaults
+  const getTranslation = (
+    key: string,
+    enDefault: string,
+    frDefault?: string
+  ) => {
+    const defaultValue =
+      i18n.language === "fr" && frDefault ? frDefault : enDefault;
+    return t(key, { defaultValue });
+  };
+  
   const [activeTab, setActiveTab] = useState("highlights");
   const highlightsRef = useRef<HTMLDivElement>(null);
   const exhibitionRef = useRef<HTMLDivElement>(null);

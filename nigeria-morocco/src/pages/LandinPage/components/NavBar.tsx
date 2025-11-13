@@ -21,6 +21,18 @@ const NavBar: React.FC<Props> = ({
   currentEdition = "first",
 }) => {
   const { t, i18n } = useTranslation();
+
+  // Helper function to get translation with language-specific defaults
+  const getTranslation = (
+    key: string,
+    enDefault: string,
+    frDefault?: string
+  ) => {
+    const defaultValue =
+      i18n.language === "fr" && frDefault ? frDefault : enDefault;
+    return t(key, { defaultValue });
+  };
+
   const items = [
     {
       key: "1",
@@ -100,7 +112,7 @@ const NavBar: React.FC<Props> = ({
           type="button"
           aria-current={isSecondEdition ? "page" : undefined}
         >
-          {t("secondEditionLink", { defaultValue: "2nd Edition" })}
+          {getTranslation("secondEditionLink", "2nd Edition", "2ème édition")}
         </button>
         <button
           onClick={handleFirstEditionClick}
@@ -120,7 +132,7 @@ const NavBar: React.FC<Props> = ({
           type="button"
           aria-current={isFirstEdition ? "page" : undefined}
         >
-          {t("firstEditionLink", { defaultValue: "1st Edition" })}
+          {getTranslation("firstEditionLink", "1st Edition", "1ère édition")}
         </button>
       </div>
     );
@@ -154,31 +166,35 @@ const NavBar: React.FC<Props> = ({
           className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="/"
         >
-          {t("About")}
+          {getTranslation("About", "About", "À propos")}
         </a>
         <a
           className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="#partners"
         >
-          {t("Sector")}
+          {getTranslation("Sector", "Sector", "Secteur")}
         </a>
         <a
           className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="#partners"
         >
-          {t("Sponsors & Partner")}
+          {getTranslation(
+            "Sponsors & Partner",
+            "Sponsors & Partner",
+            "Sponsors et Partenaires"
+          )}
         </a>
         <a
           className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="#partners"
         >
-          {t("Updates")}
+          {getTranslation("Updates", "Updates", "Mises à jour")}
         </a>
         <a
           className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="#partners"
         >
-          {t("Contact")}
+          {getTranslation("Contact", "Contact", "Contact")}
         </a>
         {renderEditionLinks("desktop")}
         <Button
@@ -190,13 +206,13 @@ const NavBar: React.FC<Props> = ({
           }}
           className="h-[40px] text-[12px] lg:text-sm hover:scale-105 transition whitespace-nowrap"
         >
-          {t("bookButtton", { defaultValue: "Book A Space" })}
+          {getTranslation("bookButtton", "Book A Space", "Réserver un espace")}
         </Button>
         <Button
           onClick={onRegister}
           className="bg-primary px-6 h-[40px] text-[12px] lg:text-sm text-white hover:scale-105 transition whitespace-nowrap"
         >
-          {t("Participate")}
+          {getTranslation("Participate", "Participate", "Participer")}
         </Button>
         <Dropdown menu={{ items }}>
           <a className="cursor-pointer" onClick={(e) => e.preventDefault()}>
@@ -224,7 +240,7 @@ const NavBar: React.FC<Props> = ({
       </div>
 
       <Drawer
-        title={t("Menu", { defaultValue: "Menu" })}
+        title={getTranslation("Menu", "Menu", "Menu")}
         onClose={onClose}
         open={open}
       >
@@ -234,14 +250,14 @@ const NavBar: React.FC<Props> = ({
             className="text-[14px]  w-full text-center"
             href="/"
           >
-            {t("Home")}
+            {getTranslation("Home", "Home", "Accueil")}
           </a>
           <a
             onClick={onClose}
             className="text-[14px] w-full text-center"
             href="#partners"
           >
-            {t("Sponsors")}
+            {getTranslation("Sponsors", "Sponsors", "Sponsors")}
           </a>
           <div className="w-full flex flex-col gap-2">
             {renderEditionLinks("mobile")}
@@ -255,13 +271,17 @@ const NavBar: React.FC<Props> = ({
             }}
             className="w-full h-[40px]"
           >
-            {t("bookButtton", { defaultValue: "Book A Space" })}
+            {getTranslation(
+              "bookButtton",
+              "Book A Space",
+              "Réserver un espace"
+            )}
           </Button>
           <Button
             onClick={onRegister}
             className="bg-primary px-6 h-[40px] text-white"
           >
-            {t("Participate")}
+            {getTranslation("Participate", "Participate", "Participer")}
           </Button>
         </div>
       </Drawer>

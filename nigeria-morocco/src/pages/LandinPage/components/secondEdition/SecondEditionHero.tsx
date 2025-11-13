@@ -24,6 +24,18 @@ const SecondEditionHero: React.FC<Props> = ({
   onScrollToPartners,
 }) => {
   const { t, i18n } = useTranslation();
+
+  // Helper function to get translation with language-specific defaults
+  const getTranslation = (
+    key: string,
+    enDefault: string,
+    frDefault?: string
+  ) => {
+    const defaultValue =
+      i18n.language === "fr" && frDefault ? frDefault : enDefault;
+    return t(key, { defaultValue });
+  };
+
   const [countdown, setCountdown] = useState<Countdown>({
     days: "0",
     hours: "0",
@@ -71,28 +83,38 @@ const SecondEditionHero: React.FC<Props> = ({
               🇳🇬 NIGERIA-MOROCCO 🇲🇦
             </h1>
             <h1 className="text-5xl md:text-6xl text-left font-bold text-primary drop-shadow-lg animate-slide-up">
-              {t("businessweek")}
+              {getTranslation(
+                "businessweek",
+                "Business Week",
+                "Semaine des affaires"
+              )}
             </h1>
             <h2 className="mt-6 text-left text-black/90 text-2xl animate-fade-in-delay">
-              {t("edition")}
+              {getTranslation("edition", "2nd Edition", "2ème édition")}
             </h2>
             <span className="my-6 text-left text-black/80 animate-fade-in-delay2">
-              {t("oct")}
+              {getTranslation(
+                "oct",
+                "8-10 December 2025, Casablanca, Morocco",
+                "8-10 décembre 2025, Casablanca, Maroc"
+              )}
             </span>
             <div className="flex gap-4 mt-4">
               <Button
                 onClick={onRegister}
                 className="bg-gradient-to-r from-primary to-blue-500 w-[180px] h-12 text-white font-semibold rounded-lg shadow-lg hover:scale-105 hover:from-black hover:to-primary transition-all duration-200"
               >
-                {i18n.language === "fr"
-                  ? "Obtenez Votre Badge"
-                  : `${t("Participate")}`}
+                {getTranslation(
+                  "Participate",
+                  "Participate",
+                  "Obtenez Votre Badge"
+                )}
               </Button>
               <Button
                 onClick={onScrollToPartners}
                 className="bg-white border border-primary text-primary w-[180px] h-12 font-semibold rounded-lg shadow hover:bg-primary hover:text-white transition-all duration-200"
               >
-                {t("learn")}
+                {getTranslation("learn", "Learn More", "En savoir plus")}
               </Button>
             </div>
           </div>
@@ -107,9 +129,19 @@ const SecondEditionHero: React.FC<Props> = ({
         left: (
           <div className="flex w-100% flex-col md:w-4/6">
             <h1 className="text-5xl md:text-6xl text-left font-bold text-white">
-              {t("slide2Head")}
+              {getTranslation(
+                "slide2Head",
+                "Strengthening Bilateral Trade",
+                "Renforcer le commerce bilatéral"
+              )}
             </h1>
-            <span className="my-6 text-left text-white">{t("slide2Body")}</span>
+            <span className="my-6 text-left text-white">
+              {getTranslation(
+                "slide2Body",
+                "Building stronger economic ties between Nigeria and Morocco through strategic partnerships and investment opportunities.",
+                "Construire des liens économiques plus forts entre le Nigeria et le Maroc grâce à des partenariats stratégiques et des opportunités d'investissement."
+              )}
+            </span>
           </div>
         ),
       },
@@ -117,9 +149,19 @@ const SecondEditionHero: React.FC<Props> = ({
         left: (
           <div className="flex w-100% flex-col md:w-4/6">
             <h1 className="text-5xl md:text-6xl text-left font-bold text-white">
-              {t("slide3Head")}
+              {getTranslation(
+                "slide3Head",
+                "Unlocking Investment Potential",
+                "Libérer le potentiel d'investissement"
+              )}
             </h1>
-            <span className="my-6 text-left text-white">{t("slide3Body")}</span>
+            <span className="my-6 text-left text-white">
+              {getTranslation(
+                "slide3Body",
+                "Explore diverse sectors including agriculture, energy, technology, and infrastructure for mutual growth and development.",
+                "Explorez divers secteurs, notamment l'agriculture, l'énergie, la technologie et les infrastructures pour une croissance et un développement mutuels."
+              )}
+            </span>
           </div>
         ),
       },

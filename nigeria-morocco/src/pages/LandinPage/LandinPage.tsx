@@ -1,9 +1,9 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import HeroCarousel from "./components/HeroSection";
 import AchievementsSection from "./components/AchievementsSection";
-import PartnersSection from "./components/PartnersSection";
+// import PartnersSection from "./components/PartnersSection";
 import SpeakersSection from "./components/SpeakersSection";
 import Modals from "./components/Modals";
 import Footer from "./components/Footer";
@@ -71,4 +71,3 @@ export default function LandinPage() {
     </div>
   );
 }
-

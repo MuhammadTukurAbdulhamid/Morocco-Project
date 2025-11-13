@@ -26,9 +26,20 @@ const Modals: React.FC<Props> = ({
   setValue,
   navigate,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
+
+  // Helper function to get translation with language-specific defaults
+  const getTranslation = (
+    key: string,
+    enDefault: string,
+    frDefault?: string
+  ) => {
+    const defaultValue =
+      i18n.language === "fr" && frDefault ? frDefault : enDefault;
+    return t(key, { defaultValue });
+  };
 
   // Reset checkbox when modal closes
   useEffect(() => {
@@ -56,9 +67,11 @@ const Modals: React.FC<Props> = ({
         <div className="flex flex-col min-h-[400px] bg-white justify-center items-center py-6">
           <img src="phone.png" alt="Phone" />
           <h1 className="font-bold mt-5 mb-4">
-            {t("EnterYourPhoneNumber", {
-              defaultValue: "Enter Your Phone Number",
-            })}
+            {getTranslation(
+              "EnterYourPhoneNumber",
+              "Enter Your Phone Number",
+              "Entrez votre numéro de téléphone"
+            )}
           </h1>
           <PhoneInput
             phone={phone}
@@ -73,7 +86,7 @@ const Modals: React.FC<Props> = ({
               className="mt-1"
             >
               <span className="text-sm">
-                {t("IAccept", { defaultValue: "I accept the" })}{" "}
+                {getTranslation("IAccept", "I accept the", "J'accepte les")}{" "}
                 <a
                   href="#"
                   onClick={(e) => {
@@ -82,32 +95,38 @@ const Modals: React.FC<Props> = ({
                   }}
                   className="text-primary hover:underline"
                 >
-                  {t("TermsAndConditions", {
-                    defaultValue: "Terms and Conditions",
-                  })}
+                  {getTranslation(
+                    "TermsAndConditions",
+                    "Terms and Conditions",
+                    "Termes et conditions"
+                  )}
                 </a>
               </span>
             </Checkbox>
           </div>
           <div className="mt-6 flex gap-4">
             <Button onClick={handleCancel} className="h-[40px]">
-              {t("Cancel", { defaultValue: "Cancel" })}
+              {getTranslation("Cancel", "Cancel", "Annuler")}
             </Button>
             <Button
               onClick={() => {
                 if (!phone || !value) {
                   message.warning(
-                    t("PhoneNumberRequired", {
-                      defaultValue: "Phone number is required",
-                    })
+                    getTranslation(
+                      "PhoneNumberRequired",
+                      "Phone number is required",
+                      "Le numéro de téléphone est requis"
+                    )
                   );
                   return;
                 }
                 if (!termsAccepted) {
                   message.warning(
-                    t("AcceptTermsRequired", {
-                      defaultValue: "Please accept the terms and conditions",
-                    })
+                    getTranslation(
+                      "AcceptTermsRequired",
+                      "Please accept the terms and conditions",
+                      "Veuillez accepter les termes et conditions"
+                    )
                   );
                   return;
                 }
@@ -121,7 +140,7 @@ const Modals: React.FC<Props> = ({
               className="bg-primary h-[40px]"
               type="primary"
             >
-              {t("Confirm", { defaultValue: "Confirm" })}
+              {getTranslation("Confirm", "Confirm", "Confirmer")}
             </Button>
           </div>
         </div>
@@ -173,16 +192,18 @@ const Modals: React.FC<Props> = ({
 
       {/* Terms and Conditions Modal */}
       <Modal
-        title={t("TermsAndConditions", {
-          defaultValue: "Terms and Conditions",
-        })}
+        title={getTranslation(
+          "TermsAndConditions",
+          "Terms and Conditions",
+          "Termes et conditions"
+        )}
         open={showTermsModal}
         onCancel={() => setShowTermsModal(false)}
         onOk={() => setShowTermsModal(false)}
         width={800}
         footer={[
           <Button key="close" onClick={() => setShowTermsModal(false)}>
-            {t("Close", { defaultValue: "Close" })}
+            {getTranslation("Close", "Close", "Fermer")}
           </Button>,
         ]}
       >

@@ -11,7 +11,19 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export default function RelatedArticles({ onBook }: { onBook: () => void }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  // Helper function to get translation with language-specific defaults
+  const getTranslation = (
+    key: string,
+    enDefault: string,
+    frDefault?: string
+  ) => {
+    const defaultValue =
+      i18n.language === "fr" && frDefault ? frDefault : enDefault;
+    return t(key, { defaultValue });
+  };
+  
   const [formData, setFormData] = useState({
     fullName: "",
     company: "",
@@ -52,15 +64,18 @@ export default function RelatedArticles({ onBook }: { onBook: () => void }) {
           {/* Header */}
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold text-gray-900 mb-3">
-              {t("WeLoveToHearFromYou", {
-                defaultValue: "We Love to Hear from You.",
-              })}
+              {getTranslation(
+                "WeLoveToHearFromYou",
+                "We Love to Hear from You.",
+                "Nous aimons avoir de vos nouvelles."
+              )}
             </h2>
             <p className="text-gray-600">
-              {t("contactDescription", {
-                defaultValue:
-                  "Have questions? Want to register or sponsor? Reach out to our team in Nigeria or Morocco",
-              })}
+              {getTranslation(
+                "contactDescription",
+                "Have questions? Want to register or sponsor? Reach out to our team in Nigeria or Morocco",
+                "Des questions ? Vous souhaitez vous inscrire ou devenir sponsor ? Contactez notre équipe au Nigeria ou au Maroc"
+              )}
             </p>
           </div>
 
@@ -70,7 +85,11 @@ export default function RelatedArticles({ onBook }: { onBook: () => void }) {
               {/* Nigeria Office */}
               <div className="bg-[#AAD4791A] shadow-sm rounded-lg p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  {t("NigeriaOffice", { defaultValue: "Nigeria Office" })}
+                  {getTranslation(
+                    "NigeriaOffice",
+                    "Nigeria Office",
+                    "Bureau du Nigeria"
+                  )}
                 </h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
@@ -115,7 +134,11 @@ export default function RelatedArticles({ onBook }: { onBook: () => void }) {
               {/* Morocco Office */}
               <div className="bg-[#F6CECE2B] rounded-lg p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  {t("MoroccoOffice", { defaultValue: "Morocco Office" })}
+                  {getTranslation(
+                    "MoroccoOffice",
+                    "Morocco Office",
+                    "Bureau du Maroc"
+                  )}
                 </h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
@@ -161,12 +184,16 @@ export default function RelatedArticles({ onBook }: { onBook: () => void }) {
             {/* Right Column - Contact Form */}
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">
-                {t("SendUsAMessage", { defaultValue: "Send Us a message" })}
+                {getTranslation(
+                  "SendUsAMessage",
+                  "Send Us a message",
+                  "Envoyez-nous un message"
+                )}
               </h3>
               <div className="space-y-8">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    {t("FullName", { defaultValue: "Full Name" })}
+                    {getTranslation("FullName", "Full Name", "Nom complet")}
                   </label>
                   <input
                     type="text"
@@ -181,9 +208,11 @@ export default function RelatedArticles({ onBook }: { onBook: () => void }) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      {t("CompanyOrganization", {
-                        defaultValue: "Company/organization",
-                      })}
+                      {getTranslation(
+                        "CompanyOrganization",
+                        "Company/organization",
+                        "Entreprise/organisation"
+                      )}
                     </label>
                     <input
                       type="text"
@@ -196,7 +225,11 @@ export default function RelatedArticles({ onBook }: { onBook: () => void }) {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      {t("EmailAddress", { defaultValue: "Email Address" })}
+                      {getTranslation(
+                        "EmailAddress",
+                        "Email Address",
+                        "Adresse e-mail"
+                      )}
                     </label>
                     <input
                       type="email"
@@ -211,7 +244,11 @@ export default function RelatedArticles({ onBook }: { onBook: () => void }) {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    {t("EnquiryType", { defaultValue: "Enquiry Type" })}
+                    {getTranslation(
+                      "EnquiryType",
+                      "Enquiry Type",
+                      "Type de demande"
+                    )}
                   </label>
                   <select
                     name="enquiryType"
@@ -219,22 +256,36 @@ export default function RelatedArticles({ onBook }: { onBook: () => void }) {
                     onChange={handleChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white"
                   >
-                    <option>{t("Sponsor", { defaultValue: "Sponsor" })}</option>
                     <option>
-                      {t("Register", { defaultValue: "Register" })}
+                      {getTranslation("Sponsor", "Sponsor", "Sponsor")}
                     </option>
                     <option>
-                      {t("GeneralInquiry", { defaultValue: "General Inquiry" })}
+                      {getTranslation("Register", "Register", "S'inscrire")}
                     </option>
                     <option>
-                      {t("Partnership", { defaultValue: "Partnership" })}
+                      {getTranslation(
+                        "GeneralInquiry",
+                        "General Inquiry",
+                        "Demande générale"
+                      )}
+                    </option>
+                    <option>
+                      {getTranslation(
+                        "Partnership",
+                        "Partnership",
+                        "Partenariat"
+                      )}
                     </option>
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    {t("YourMessage", { defaultValue: "Your message" })}
+                    {getTranslation(
+                      "YourMessage",
+                      "Your message",
+                      "Votre message"
+                    )}
                   </label>
                   <textarea
                     name="message"
@@ -249,7 +300,7 @@ export default function RelatedArticles({ onBook }: { onBook: () => void }) {
                   onClick={handleSubmit}
                   className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
                 >
-                  {t("Submit", { defaultValue: "Submit" })}
+                  {getTranslation("Submit", "Submit", "Soumettre")}
                 </button>
               </div>
             </div>
@@ -279,17 +330,22 @@ export default function RelatedArticles({ onBook }: { onBook: () => void }) {
             </h1>
 
             <p className="text-white text-lg mb-8 max-w-2xl mx-auto">
-              {t("ctaDescription", {
-                defaultValue:
-                  "Be part of this powerful movement. Start today by becoming a sponsor, register to attend to learn.",
-              })}
+              {getTranslation(
+                "ctaDescription",
+                "Be part of this powerful movement. Start today by becoming a sponsor, register to attend to learn.",
+                "Faites partie de ce mouvement puissant. Commencez dès aujourd'hui en devenant sponsor, inscrivez-vous pour participer et apprendre."
+              )}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={onBook}
                 className="bg-white hover:bg-gray-100 text-teal-700 px-8 py-3 rounded-lg font-semibold transition shadow-lg"
               >
-                {t("RegisterAttend", { defaultValue: "Register/ Attend" })}
+                {getTranslation(
+                  "RegisterAttend",
+                  "Register/ Attend",
+                  "S'inscrire / Participer"
+                )}
               </button>
             </div>
           </div>

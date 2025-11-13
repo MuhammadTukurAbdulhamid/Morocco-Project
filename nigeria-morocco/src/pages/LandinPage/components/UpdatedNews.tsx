@@ -65,6 +65,17 @@ const FALLBACK_ARTICLES: NewsItem[] = [
 
 export default function NewsUpdates() {
   const { t, i18n } = useTranslation();
+
+  // Helper function to get translation with language-specific defaults
+  const getTranslation = (
+    key: string,
+    enDefault: string,
+    frDefault?: string
+  ) => {
+    const defaultValue =
+      i18n.language === "fr" && frDefault ? frDefault : enDefault;
+    return t(key, { defaultValue });
+  };
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { news, loading, error } = useFetchNews();
 
@@ -117,22 +128,28 @@ export default function NewsUpdates() {
     <div className="w-full bg-white">
       <div className="max-w-7xl mx-auto px-5 md:px-10 py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          {t("UpdatesAndNews", { defaultValue: "Updates and News" })}
+          {getTranslation(
+            "UpdatesAndNews",
+            "Updates and News",
+            "Mises à jour et actualités"
+          )}
         </h1>
         <p className="text-sm text-gray-600">
-          {t("newsDescription", {
-            defaultValue:
-              "Look at posts gallery or shop website from a welder and gas merlin.",
-          })}
+          {getTranslation(
+            "newsDescription",
+            "Look at posts gallery or shop website from a welder and gas merlin.",
+            "Consultez la galerie de publications ou le site Web d'un soudeur et d'un merlin à gaz."
+          )}
         </p>
       </div>
 
       <div className="max-w-7xl mx-auto px-5 md:px-10 mb-12">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">
-          {t("FirstEditionReport", {
-            defaultValue:
-              "First Edition of The Nigeria – Morocco Business Week Report",
-          })}
+          {getTranslation(
+            "FirstEditionReport",
+            "First Edition of The Nigeria – Morocco Business Week Report",
+            "Rapport de la première édition de la Semaine des affaires Nigeria – Maroc"
+          )}
         </h2>
 
         <div className="relative w-full rounded-lg overflow-hidden shadow-lg group min-h-[240px] flex items-center justify-center bg-gray-100">

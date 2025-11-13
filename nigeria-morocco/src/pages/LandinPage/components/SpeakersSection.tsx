@@ -14,7 +14,19 @@ interface Speaker {
 }
 
 const SpeakersSection: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  // Helper function to get translation with language-specific defaults
+  const getTranslation = (
+    key: string,
+    enDefault: string,
+    frDefault?: string
+  ) => {
+    const defaultValue =
+      i18n.language === "fr" && frDefault ? frDefault : enDefault;
+    return t(key, { defaultValue });
+  };
+  
   const [activeTab, setActiveTab] = useState("confirmed");
   const [itemsPerSlide, setItemsPerSlide] = useState(3);
 
@@ -126,12 +138,14 @@ const SpeakersSection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
-            {t("Speakers", { defaultValue: "Speakers" })}
+            {getTranslation("Speakers", "Speakers", "Conférenciers")}
           </h1>
           <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
-            {t("speakersDescription", {
-              defaultValue: "View list of present and past event speakers",
-            })}
+            {getTranslation(
+              "speakersDescription",
+              "View list of present and past event speakers",
+              "Voir la liste des conférenciers présents et passés de l'événement"
+            )}
           </p>
         </div>
 
@@ -144,7 +158,11 @@ const SpeakersSection: React.FC = () => {
                 : "bg-white text-gray-700 border-2 border-gray-300 hover:border-primary hover:bg-gray-50"
             }`}
           >
-            {t("ConfirmedSpeakers", { defaultValue: "Confirmed Speakers" })}
+            {getTranslation(
+              "ConfirmedSpeakers",
+              "Confirmed Speakers",
+              "Conférenciers confirmés"
+            )}
           </button>
         </div>
 

@@ -14,6 +14,17 @@ const SecondEditionNavBar: React.FC<Props> = ({ onRegister, onBook }) => {
   const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
 
+  // Helper function to get translation with language-specific defaults
+  const getTranslation = (
+    key: string,
+    enDefault: string,
+    frDefault?: string
+  ) => {
+    const defaultValue =
+      i18n.language === "fr" && frDefault ? frDefault : enDefault;
+    return t(key, { defaultValue });
+  };
+
   const items: MenuProps["items"] = [
     {
       key: "en",
@@ -54,19 +65,19 @@ const SecondEditionNavBar: React.FC<Props> = ({ onRegister, onBook }) => {
           className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="#top"
         >
-          {t("Home")}
+          {getTranslation("Home", "Home", "Accueil")}
         </a>
         <a
           className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="#partners"
         >
-          {t("Sponsors")}
+          {getTranslation("Sponsors", "Sponsors", "Sponsors")}
         </a>
         <a
           className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
           href="/"
         >
-          {t("firstEditionLink", { defaultValue: "1st Edition" })}
+          {getTranslation("firstEditionLink", "1st Edition", "1ère édition")}
         </a>
         <Button
           type="primary"
@@ -77,17 +88,17 @@ const SecondEditionNavBar: React.FC<Props> = ({ onRegister, onBook }) => {
           }}
           className="h-[40px] text-[12px] lg:text-sm hover:scale-105 transition whitespace-nowrap"
         >
-          {i18n.language === "fr"
-            ? t("bookButtton", { defaultValue: "Obtenez Votre Stand/Espace" })
-            : t("bookButtton")}
+          {getTranslation(
+            "bookButtton",
+            "Book A Space",
+            "Obtenez Votre Stand/Espace"
+          )}
         </Button>
         <Button
           onClick={onRegister}
           className="bg-primary min-w-[115px] h-[40px] text-[12px] lg:text-sm text-white hover:scale-105 transition whitespace-nowrap"
         >
-          {i18n.language === "fr"
-            ? t("Participate", { defaultValue: "Obtenez Votre Badge" })
-            : t("Participate")}
+          {getTranslation("Participate", "Participate", "Obtenez Votre Badge")}
         </Button>
         <Dropdown menu={{ items }}>
           <a className="cursor-pointer" onClick={(e) => e.preventDefault()}>
@@ -114,7 +125,7 @@ const SecondEditionNavBar: React.FC<Props> = ({ onRegister, onBook }) => {
       </div>
 
       <Drawer
-        title={t("Menu", { defaultValue: "Menu" })}
+        title={getTranslation("Menu", "Menu", "Menu")}
         onClose={onClose}
         open={open}
       >
@@ -124,21 +135,21 @@ const SecondEditionNavBar: React.FC<Props> = ({ onRegister, onBook }) => {
             className="text-[14px]  w-full text-center"
             href="#top"
           >
-            {t("Home")}
+            {getTranslation("Home", "Home", "Accueil")}
           </a>
           <a
             onClick={onClose}
             className="text-[14px] w-full text-center"
             href="#partners"
           >
-            {t("Sponsors")}
+            {getTranslation("Sponsors", "Sponsors", "Sponsors")}
           </a>
           <a
             onClick={onClose}
             className="text-[14px] w-full text-center"
             href="/"
           >
-            {t("firstEditionLink", { defaultValue: "1st Edition" })}
+            {getTranslation("firstEditionLink", "1st Edition", "1ère édition")}
           </a>
           <Button
             type="primary"
@@ -150,9 +161,11 @@ const SecondEditionNavBar: React.FC<Props> = ({ onRegister, onBook }) => {
             }}
             className="w-full h-[40px]"
           >
-            {i18n.language === "fr"
-              ? "Obtenez Votre Stand/Espace"
-              : t("bookButtton")}
+            {getTranslation(
+              "bookButtton",
+              "Book A Space",
+              "Obtenez Votre Stand/Espace"
+            )}
           </Button>
           <Button
             onClick={() => {
@@ -161,7 +174,11 @@ const SecondEditionNavBar: React.FC<Props> = ({ onRegister, onBook }) => {
             }}
             className="bg-primary w-full h-[40px] text-white"
           >
-            {i18n.language === "fr" ? "Obtenez Votre Badge" : t("Participate")}
+            {getTranslation(
+              "Participate",
+              "Participate",
+              "Obtenez Votre Badge"
+            )}
           </Button>
         </div>
       </Drawer>

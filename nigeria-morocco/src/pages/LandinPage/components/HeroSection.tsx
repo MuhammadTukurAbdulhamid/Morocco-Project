@@ -9,11 +9,22 @@ interface Props {
 }
 
 const HeroSection: React.FC<Props> = ({
-  onRegister,
-  onBook,
+  // onRegister,
+  // onBook,
   onNavigateSecondEdition,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  // Helper function to get translation with language-specific defaults
+  const getTranslation = (
+    key: string,
+    enDefault: string,
+    frDefault?: string
+  ) => {
+    const defaultValue =
+      i18n.language === "fr" && frDefault ? frDefault : enDefault;
+    return t(key, { defaultValue });
+  };
 
   const stats = [
     {
@@ -100,7 +111,11 @@ const HeroSection: React.FC<Props> = ({
             onClick={onNavigateSecondEdition}
             className="bg-green-600 hover:bg-green-700 w-full sm:w-[220px] h-12 text-white font-semibold hover:scale-105 transition-all duration-200"
           >
-            {t("secondEditionLink", { defaultValue: "Explore 2nd Edition" })}
+            {getTranslation(
+              "secondEditionLink",
+              "Explore 2nd Edition",
+              "Explorer la 2ème édition"
+            )}
           </Button>
         </div>
       </div>

@@ -1,4 +1,17 @@
 {
-    "hello": "Hola",
-    "welcome": "Bienvenido a nuestro sitio web"
-  }
+  "About": "À propos",
+  "Sector": "Secteur",
+  "Sectors": "Secteurs",
+  "Sponsors & Partner": "Sponsors et Partenaires",
+  "Sponsors": "Sponsors",
+  "Updates": "Mises à jour",
+  "Contact": "Contact",
+  "Home": "Accueil",
+  "Menu": "Menu",
+  "Participate": "Participer",
+  "bookButtton": "Réserver un espace",
+  "firstEditionLink": "1ère édition",
+  "secondEditionLink": "2ème édition",
+  "EnglishLanguage": "Langue anglaise",
+  "FrenchLanguage": "Langue française"
+}
