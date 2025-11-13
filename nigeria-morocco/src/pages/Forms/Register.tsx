@@ -59,14 +59,12 @@ interface UploadProps {
   accept: string;
 }
 export default function Register() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [openSummary, setOpenSummary] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [selectedNiche, setNiche] = useState<string[] | []>([]);
   const [selectedMeeting, setMeeting] = useState<string[]>([]);
   const [userId, setUserId] = useState<string>("");
   const [email] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
   const { register, registering } = useRegister();
   const navigate = useNavigate();
   const location = useLocation();
@@ -210,10 +208,6 @@ export default function Register() {
     const total = base + tax;
     return { base, tax, total };
   }, [formik.values.cities]);
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
 
   const NigerianMinisteries = [
     {
@@ -563,9 +557,7 @@ export default function Register() {
       console.log("Dropped files", e.dataTransfer.files);
     },
   };
-  useEffect(() => {
-    setIsModalOpen(true);
-  }, []);
+
   return (
     <div
       // style={{ backgroundImage: "url(rectangle.png)" }}
@@ -1139,156 +1131,7 @@ export default function Register() {
           </div>
         </div>
       </div>
-      {/* Terms Modal */}
-      <Modal
-        closable={false}
-        keyboard={false}
-        footer={null}
-        centered
-        title=""
-        open={isModalOpen}
-        onCancel={handleCancel}
-      >
-        <div className="flex flex-col min-h-[400px] bg-white rounded-xl p-3 animate-fade-in">
-          <h1 className="text-lg font-bold text-primary mb-2">
-            Terms and Conditions
-          </h1>
-          <div className="border-[#9D9DB7] border h-[217px] w-full my-5 overflow-y-scroll p-[10px] rounded bg-silver/30 text-gray-700 text-sm">
-            {phoneNumber.startsWith("+212") ? (
-              <p className="text-justify">
-                <span>{t("termsAndConditionsForMorocco")}</span>
-              </p>
-            ) : (
-              <p className="text-justify">
-                <span>
-                  Welcome to Nigeria-Morocco Business Week! By proceeding with
-                  the registration process, you agree to the following terms and
-                  conditions:
-                </span>
-                Registration Information: <br />
-                1.1 You must provide accurate and complete information during
-                the registration process. <br />
-                1.2 You are responsible for maintaining the confidentiality of
-                your account credentials and for all activities that occur under
-                your account. <br />
-                <span>Data Collection and Use: </span>
-                2.1 We collect personal information such as your name, email
-                address, and other relevant details for registration and
-                communication purposes. <br />
-                2.2 Your data may be shared with third parties for specific
-                purposes such as marketing, analytics, or service provision. We
-                will not sell or rent your personal information to third parties
-                without your explicit consent.
-                <br />
-                2.3 We may collect non-personal information such as browser
-                type, IP address, and usage patterns to improve our services and
-                user experience.
-                <br />
-                <span>Cookies and Tracking:</span>
-                3.1 We use cookies and similar technologies to enhance your
-                browsing experience and track usage patterns.
-                <br />
-                3.2 By using our website, you consent to the use of cookies and
-                tracking technologies as described in our Privacy Policy.
-                <br />
-                <span>Content Submission:</span>
-                4.1 You are solely responsible for any content you submit or
-                upload to the website.
-                <br />
-                4.2 By submitting content, you grant us a non-exclusive,
-                royalty-free, perpetual, irrevocable, and worldwide license to
-                use, reproduce, modify, adapt, publish, translate, distribute,
-                and display such content.
-                <br />
-                <span>Intellectual Property:</span>
-                5.1 All content and materials on the website, including but not
-                limited to text, graphics, logos, and software, are owned or
-                licensed by us and are protected by intellectual property laws.
-                <br />
-                5.2 You may not use, reproduce, modify, or distribute any
-                content from the website without our prior written consent.
-                <br />
-                <span>Disclaimer of Warranties:</span>
-                6.1 We strive to provide accurate and up-to-date information,
-                but we do not warrant the completeness, reliability, or accuracy
-                of the content on the website.
-                <br />
-                6.2 Your use of the website is at your own risk, and we disclaim
-                all warranties, express or implied, including but not limited to
-                warranties of merchantability, fitness for a particular purpose,
-                and non-infringement.
-                <br />
-                <span>Limitation of Liability:</span>
-                7.1 We shall not be liable for any direct, indirect, incidental,
-                consequential, or punitive damages arising out of your use or
-                inability to use the website.
-                <br />
-                7.2 Our total liability to you for any claims arising from or
-                related to the website shall not exceed the amount paid by you,
-                if any, for accessing the website.
-                <br />
-                <span>Indemnification:</span>
-                8.1 You agree to indemnify and hold us harmless from any claims,
-                losses, liabilities, damages, costs, and expenses arising out of
-                your use of the website or violation of these terms and
-                conditions.
-                <br />
-                Governing Law: 9.1 These terms and conditions shall be governed
-                by and construed in accordance with the laws of Nigeria and
-                Morocco.
-                <br />
-                9.2 Any disputes arising out of or related to these terms and
-                conditions shall be subject to the exclusive jurisdiction of the
-                courts in Nigeria and Morocco.
-                <br />
-                <span>Changes to Terms:</span>
-                10.1 We reserve the right to modify or update these terms and
-                conditions at any time without prior notice.
-                <br />
-                10.2 Your continued use of the website after such changes
-                constitutes your acceptance of the modified terms.
-                <br />
-                <span>
-                  Please review these terms and conditions carefully before
-                  proceeding with the registration process. If you do not agree
-                  with any part of these terms, please do not proceed further.
-                  If you have any questions or concerns, please contact us at
-                  info@spectre.com.
-                </span>
-                <span>
-                  By clicking "I Agree" or similar buttons, you acknowledge that
-                  you have read, understood, and agreed to these terms and
-                  conditions.
-                </span>
-              </p>
-            )}
-          </div>
-          <div className="my-3 flex items-center">
-            <Checkbox
-              onChange={(e) => setIsChecked(e.target.checked)}
-              checked={isChecked}
-            >
-              {t("accept")}
-            </Checkbox>
-          </div>
-          <div className="flex gap-4 items-center justify-end mt-5">
-            <Button
-              onClick={() => navigate("/")}
-              className="border-primary bg-transparent text-primary h-[38px] hover:bg-primary/10 transition-all duration-200"
-            >
-              Cancel
-            </Button>
-            <Button
-              disabled={!isChecked}
-              onClick={handleCancel}
-              className="bg-primary h-[38px] text-white font-semibold rounded-lg shadow hover:scale-105 transition-all duration-200"
-              type="primary"
-            >
-              Confirm
-            </Button>
-          </div>
-        </div>
-      </Modal>
+
       <PaymentSumarryModal
         email={email}
         id={userId}

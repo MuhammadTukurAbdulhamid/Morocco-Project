@@ -27,27 +27,29 @@ export default function SecondEdition() {
   };
 
   return (
-    <div className="relative min-h-screen bg-white overflow-x-hidden">
+    <div className="relative min-h-screen bg-white">
       <SecondEditionNavBar
         onRegister={() => setIsModalOpen(true)}
         onBook={() => setBookingModalOpen(true)}
       />
-      <SecondEditionHero
-        onRegister={() => setIsModalOpen(true)}
-        onScrollToPartners={handleScrollToPartners}
-      />
-      <ConceptNote />
+      <div className="overflow-x-hidden">
+        <SecondEditionHero
+          onRegister={() => setIsModalOpen(true)}
+          onScrollToPartners={handleScrollToPartners}
+        />
+        <ConceptNote />
 
-      <SecondEditionPartners ref={partnersRef} />
-      <SecondEditionPrograms />
-      <SecondEditionSpaceBooking onBook={() => setBookingModalOpen(true)} />
-      <SecondEditionAbout />
-      <SecondEditionNews />
-      <SecondEditionTestimonials />
-      <SecondEditionFAQ />
+        <SecondEditionPartners ref={partnersRef} />
+        <SecondEditionPrograms />
+        <SecondEditionSpaceBooking onBook={() => setBookingModalOpen(true)} />
+        <SecondEditionAbout />
+        <SecondEditionNews />
+        <SecondEditionTestimonials />
+        <SecondEditionFAQ />
 
-      <FloatingWhatsApp />
-      <Footer />
+        <FloatingWhatsApp />
+        <Footer />
+      </div>
 
       <Modals
         isModalOpen={isModalOpen}

@@ -84,7 +84,7 @@ const HeroSection: React.FC<Props> = ({
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-10">
-          <Button
+          {/* <Button
             onClick={onRegister}
             className="bg-primary hover:bg-primary/90 w-full sm:w-[200px] h-12 text-white font-semibold hover:scale-105 transition-all duration-200"
           >
@@ -95,7 +95,7 @@ const HeroSection: React.FC<Props> = ({
             className="bg-white border-2 border-white text-gray-900 hover:bg-gray-100 w-full sm:w-[200px] h-12 font-semibold rounded-lg shadow-lg hover:scale-105 transition-all duration-200"
           >
             {t("contactTeamCta", { defaultValue: "Contact Our Team" })}
-          </Button>
+          </Button> */}
           <Button
             onClick={onNavigateSecondEdition}
             className="bg-green-600 hover:bg-green-700 w-full sm:w-[220px] h-12 text-white font-semibold hover:scale-105 transition-all duration-200"

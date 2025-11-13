@@ -8,8 +8,9 @@ import {
   InstagramOutlined,
   LinkedinOutlined,
 } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
-export default function ContactSection() {
+export default function RelatedArticles({ onBook }: { onBook: () => void }) {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -284,10 +285,10 @@ export default function ContactSection() {
               })}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-[#118256] hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition shadow-lg">
-                {t("BecomeASponsor", { defaultValue: "Become A Sponsor" })}
-              </button>
-              <button className="bg-white hover:bg-gray-100 text-teal-700 px-8 py-3 rounded-lg font-semibold transition shadow-lg">
+              <button
+                onClick={onBook}
+                className="bg-white hover:bg-gray-100 text-teal-700 px-8 py-3 rounded-lg font-semibold transition shadow-lg"
+              >
                 {t("RegisterAttend", { defaultValue: "Register/ Attend" })}
               </button>
             </div>
