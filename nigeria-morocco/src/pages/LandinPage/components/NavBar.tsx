@@ -164,19 +164,19 @@ const NavBar: React.FC<Props> = ({
       <div className="hidden xl:flex items-center space-x-3 lg:space-x-4 xl:space-x-6 flex-wrap xl:flex-nowrap">
         <a
           className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
-          href="/"
+          href="#about"
         >
           {getTranslation("About", "About", "À propos")}
         </a>
         <a
           className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
-          href="#partners"
+          href="#sectors"
         >
           {getTranslation("Sector", "Sector", "Secteur")}
         </a>
         <a
           className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
-          href="#partners"
+          href="#speakers"
         >
           {getTranslation(
             "Sponsors & Partner",
@@ -186,13 +186,13 @@ const NavBar: React.FC<Props> = ({
         </a>
         <a
           className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
-          href="#partners"
+          href="#updates"
         >
           {getTranslation("Updates", "Updates", "Mises à jour")}
         </a>
         <a
           className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
-          href="#partners"
+          href="#contact"
         >
           {getTranslation("Contact", "Contact", "Contact")}
         </a>
@@ -248,14 +248,14 @@ const NavBar: React.FC<Props> = ({
           <a
             onClick={onClose}
             className="text-[14px]  w-full text-center"
-            href="/"
+            href="#about"
           >
             {getTranslation("Home", "Home", "Accueil")}
           </a>
           <a
             onClick={onClose}
             className="text-[14px] w-full text-center"
-            href="#partners"
+            href="#speakers"
           >
             {getTranslation("Sponsors", "Sponsors", "Sponsors")}
           </a>

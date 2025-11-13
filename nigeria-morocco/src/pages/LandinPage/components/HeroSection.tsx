@@ -47,6 +47,7 @@ const HeroSection: React.FC<Props> = ({
 
   return (
     <div
+      id="about"
       style={{
         background:
           "linear-gradient(rgba(10, 25, 41, 0.75), rgba(26, 58, 82, 0.75)), url(/landinghome.svg)",
@@ -55,7 +56,7 @@ const HeroSection: React.FC<Props> = ({
         backgroundPosition: "center",
         backgroundSize: "cover",
       }}
-      className="flex w-full px-5 flex-col justify-start md:flex-row md:justify-between items-center flex-1 md:px-20 lg:px-40 py-24 md:py-32"
+      className="flex w-full px-5 flex-col justify-start md:flex-row md:justify-between items-center flex-1 md:px-20 lg:px-40 py-24 md:py-32 scroll-mt-20"
     >
       <div className="flex w-full flex-col md:w-4/6 animate-fade-in">
         <p className="text-sm md:text-base tracking-[0.4em] text-primary font-semibold uppercase">

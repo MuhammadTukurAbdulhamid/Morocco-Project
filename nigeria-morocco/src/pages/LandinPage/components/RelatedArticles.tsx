@@ -57,7 +57,7 @@ export default function RelatedArticles({ onBook }: { onBook: () => void }) {
   };
 
   return (
-    <div className="w-full ">
+    <div id="contact" className="w-full scroll-mt-20">
       {/* Contact Section */}
       <div className="max-w-6xl mx-auto px-5 py-16">
         <div className="rounded-lg p-8 ">

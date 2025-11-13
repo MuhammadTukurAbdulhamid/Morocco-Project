@@ -134,7 +134,10 @@ const SpeakersSection: React.FC = () => {
   const slides = getSlides();
 
   return (
-    <div className="py-16 px-4 bg-gradient-to-br from-white via-blue-50/30 to-silver/20 sm:px-6 lg:px-8">
+    <div
+      id="speakers"
+      className="py-16 px-4 bg-gradient-to-br from-white via-blue-50/30 to-silver/20 sm:px-6 lg:px-8 scroll-mt-20"
+    >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">

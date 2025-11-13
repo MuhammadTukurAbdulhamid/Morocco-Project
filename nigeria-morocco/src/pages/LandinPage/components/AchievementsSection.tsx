@@ -487,7 +487,7 @@ const AchievementsSection: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-50">
+    <div id="sectors" className="bg-gray-50 scroll-mt-20">
       {/* Section Header */}
       <motion.div
         ref={headerRef}

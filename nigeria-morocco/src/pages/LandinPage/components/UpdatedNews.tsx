@@ -125,7 +125,7 @@ export default function NewsUpdates() {
   };
 
   return (
-    <div className="w-full bg-white">
+    <div id="updates" className="w-full bg-white scroll-mt-20">
       <div className="max-w-7xl mx-auto px-5 md:px-10 py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
           {getTranslation(
