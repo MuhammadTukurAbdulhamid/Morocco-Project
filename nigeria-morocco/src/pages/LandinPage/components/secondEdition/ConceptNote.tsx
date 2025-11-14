@@ -230,7 +230,7 @@ export default function ConceptNote() {
             {[
               {
                 icon: Leaf,
-                title: "Agriculture & Agri-business",
+                title: "Agriculture & Agri-industry",
                 color: "from-green-500 to-emerald-600",
               },
               {

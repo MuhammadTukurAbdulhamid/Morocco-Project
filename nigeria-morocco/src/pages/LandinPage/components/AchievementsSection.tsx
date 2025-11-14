@@ -174,12 +174,9 @@ const AchievementsSection: React.FC = () => {
           "Rencontres interentreprises facilitant les partenariats directs"
         ),
         images: [
-          { src: "/achievements/b2b-1.jpg", alt: "B2B Meeting 1" },
-          { src: "/achievements/b2b-2.jpg", alt: "B2B Meeting 2" },
-          { src: "/achievements/b2b-3.jpg", alt: "B2B Meeting 3" },
-          { src: "/achievements/b2b-4.jpg", alt: "B2B Meeting 4" },
-          { src: "/achievements/b2b-5.jpg", alt: "B2B Meeting 5" },
-          { src: "/achievements/b2b-6.jpg", alt: "B2B Meeting 6" },
+          { src: "/achievements/b2b-1.jpeg", alt: "B2B Meeting 1" },
+          { src: "/achievements/b2b-2.jpeg", alt: "B2B Meeting 2" },
+          { src: "/achievements/b2b-3.jpeg", alt: "B2B Meeting 3" },
         ],
         content: [
           getTranslation(
@@ -348,6 +345,27 @@ const AchievementsSection: React.FC = () => {
           {
             src: "/achievements/visitation.jpeg",
             alt: "Factory and Site Visits",
+            caption: getTranslation(
+              "visitationImage1Caption",
+              "Visit to Lesieur Oil Company on 30th Oct.,2024 with Chairman organizing Committee Amb. Usman Sarki, President CONSCCIMA Mal. Dalhatu Abubakar, CEO FRAMAZAZS Resources Ltd. Amb. Dr. Nana Aisha Gambo, CEO AMTRIGG Ltd. Vice Admiral AWWAL Gambo Zubiaru rtd.,Secretary Oragnizing Committee Mahmoud Yola Abdulhamid, Jigawa State Representative Maryam Abdul, Executive Vice President KK Kingdom Group"
+            ),
+          },
+          {
+            src: "/achievements/visitation-2.jpeg",
+            alt: "ONHYM Meeting",
+            caption: getTranslation(
+              "visitationImage2Caption",
+              "Picture at ONHYM on 30th Oct., 2024 after the Meeting with Mrs. Amina Benkhadra and the Hon. Minister H.E Uba Ahmadu Maigari, Nigerian Delegation & Embassy Staff",
+              "Photo à l'ONHYM le 30 octobre 2024 après la réunion avec Mme Amina Benkhadra et le ministre honoraire S.E. Uba Ahmadu Maigari, la délégation nigériane et le personnel de l'ambassade"
+            ),
+          },
+          {
+            src: "/achievements/visitation-3.jpeg",
+            alt: "ONHYM Meeting",
+            caption: getTranslation(
+              "visitationImage2Caption",
+              "H.E Uba Ahmadu Maigari, The Charge d’Affairs Mr. Adamu Salihu Zanuwa, The DG Automotive Design & Development Council’s Visit to Emove Company"
+            ),
           },
         ],
         content: [
@@ -392,6 +410,7 @@ const AchievementsSection: React.FC = () => {
             "Visite de site au groupe Cherradi pour discuter de partenariats et collaborations potentiels"
           ),
         ],
+        useCarousel: true,
       },
     }),
     [i18n.language]
