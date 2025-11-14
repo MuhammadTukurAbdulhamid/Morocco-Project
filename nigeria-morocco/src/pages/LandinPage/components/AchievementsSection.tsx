@@ -41,6 +41,7 @@ const AchievementsSection: React.FC = () => {
   const b2bRef = useRef<HTMLDivElement>(null);
   const mouRef = useRef<HTMLDivElement>(null);
   const panelSessionRef = useRef<HTMLDivElement>(null);
+  const visitationRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
 
   const headerInView = useInView(headerRef, { once: true, amount: 0.3 });
@@ -127,8 +128,8 @@ const AchievementsSection: React.FC = () => {
           "Mise en valeur des industries clés du Nigeria et du Maroc"
         ),
         images: [
-          { src: "/achievements/exhibition-1.jpg", alt: "Exhibition Stand 1" },
-          { src: "/achievements/exhibition-2.jpg", alt: "Exhibition Stand 2" },
+          { src: "/achievements/exhibition-1.jpeg", alt: "Exhibition Stand 1" },
+          { src: "/achievements/exhibition-2.jpeg", alt: "Exhibition Stand 2" },
           { src: "/achievements/exhibition-3.jpg", alt: "Products Exhibition" },
           { src: "/achievements/exhibition-4.jpg", alt: "Jigawa State Stand" },
           {
@@ -331,6 +332,67 @@ const AchievementsSection: React.FC = () => {
         ],
         useCarousel: true,
       },
+      visitation: {
+        id: "visitation",
+        title: getTranslation(
+          "FactorySiteVisits",
+          "Factory & Site Visits",
+          "Visites d'usines et de sites"
+        ),
+        description: getTranslation(
+          "visitationDescription",
+          "Site visits to industrial facilities and key companies in Morocco",
+          "Visites de sites d'installations industrielles et d'entreprises clés au Maroc"
+        ),
+        images: [
+          {
+            src: "/achievements/visitation.jpeg",
+            alt: "Factory and Site Visits",
+          },
+        ],
+        content: [
+          getTranslation(
+            "factorySiteVisitsOverview",
+            "Factory and Site Visits to industrial facilities including OCP, EMOVE, Maghreb Steel, Cherradi Group, and Lesieur Oil",
+            "Visites d'usines et de sites d'installations industrielles, notamment OCP, EMOVE, Maghreb Steel, Cherradi Group et Lesieur Oil"
+          ),
+          getTranslation(
+            "lesieurOilVisitDetails",
+            "Visit to Lesieur Oil Company on 30th October 2024 with Chairman Organizing Committee Amb. Usman Sarki, President CONSCCIMA Mal. Dalhatu Abubakar, CEO FRAMAZAZS Resources Ltd. Amb. Dr. Nana Aisha Gambo, CEO AMTRIGG Ltd. Vice Admiral AWWAL Gambo Zubiaru rtd., Secretary Organizing Committee Mahmoud Yola Abdulhamid, Jigawa State Representative Maryam Abdul, and Executive Vice President KK Kingdom Group",
+            "Visite de la société Lesieur Oil le 30 octobre 2024 avec le président du comité d'organisation Amb. Usman Sarki, le président CONSCCIMA Mal. Dalhatu Abubakar, PDG FRAMAZAZS Resources Ltd. Amb. Dr. Nana Aisha Gambo, PDG AMTRIGG Ltd. Vice-amiral AWWAL Gambo Zubiaru retraité, secrétaire du comité d'organisation Mahmoud Yola Abdulhamid, représentant de l'État de Jigawa Maryam Abdul et vice-président exécutif KK Kingdom Group"
+          ),
+          getTranslation(
+            "onhymMeetingDetails",
+            "Meeting at ONHYM on 30th October 2024 with Mrs. Amina Benkhadra and the Hon. Minister H.E Uba Ahmadu Maigari, Nigerian Delegation & Embassy Staff",
+            "Réunion à l'ONHYM le 30 octobre 2024 avec Mme Amina Benkhadra et le ministre honoraire S.E. Uba Ahmadu Maigari, la délégation nigériane et le personnel de l'ambassade"
+          ),
+          getTranslation(
+            "naddcEmoveVisitDetails",
+            "NADDC Director-General Mr. Oluwemimo Joseph Osanipin's Visit to Emove Company on 31st October 2024, accompanied by H.E Uba Ahmadu Maigari and The Charge d'Affairs Mr. Adamu Salihu Zanuwa",
+            "Visite du directeur général du NADDC M. Oluwemimo Joseph Osanipin à la société Emove le 31 octobre 2024, accompagné de S.E. Uba Ahmadu Maigari et du chargé d'affaires M. Adamu Salihu Zanuwa"
+          ),
+          getTranslation(
+            "highlandAMEEMeeting",
+            "Highland Integrated Services Ltd. Meeting with AMEE (Moroccan Agency for Energy Efficiency) where they sought help for energy optimization & energy efficiency for their Electricity distribution franchise",
+            "Réunion de Highland Integrated Services Ltd. avec l'AMEE (Agence marocaine pour l'efficacité énergétique) où ils ont demandé de l'aide pour l'optimisation énergétique et l'efficacité énergétique de leur franchise de distribution d'électricité"
+          ),
+          getTranslation(
+            "ocpVisit",
+            "Site visit to OCP (Office Chérifien des Phosphates), one of the world's leading phosphate producers",
+            "Visite de site à l'OCP (Office Chérifien des Phosphates), l'un des principaux producteurs de phosphate au monde"
+          ),
+          getTranslation(
+            "maghrebSteelVisit",
+            "Factory visit to Maghreb Steel to explore opportunities in the steel and metallurgy sector",
+            "Visite d'usine à Maghreb Steel pour explorer les opportunités dans le secteur de l'acier et de la métallurgie"
+          ),
+          getTranslation(
+            "cherradiGroupVisit",
+            "Site visit to Cherradi Group to discuss potential partnerships and collaborations",
+            "Visite de site au groupe Cherradi pour discuter de partenariats et collaborations potentiels"
+          ),
+        ],
+      },
     }),
     [i18n.language]
   );
@@ -370,6 +432,15 @@ const AchievementsSection: React.FC = () => {
         ),
         ref: panelSessionRef,
       },
+      {
+        id: "visitation",
+        label: getTranslation(
+          "FactorySiteVisits",
+          "Factory & Site Visits",
+          "Visites d'usines et de sites"
+        ),
+        ref: visitationRef,
+      },
     ],
     [
       i18n.language,
@@ -378,6 +449,7 @@ const AchievementsSection: React.FC = () => {
       b2bRef,
       mouRef,
       panelSessionRef,
+      visitationRef,
     ]
   );
 
