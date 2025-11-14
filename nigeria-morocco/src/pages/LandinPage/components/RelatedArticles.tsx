@@ -8,7 +8,6 @@ import {
   InstagramOutlined,
   LinkedinOutlined,
 } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
 
 export default function RelatedArticles({ onBook }: { onBook: () => void }) {
   const { t, i18n } = useTranslation();

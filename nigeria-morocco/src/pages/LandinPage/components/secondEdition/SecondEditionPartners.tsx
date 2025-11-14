@@ -1,6 +1,4 @@
 import { forwardRef } from "react";
-import { useTranslation } from "react-i18next";
-
 const partnerLogos = {
   auspices: [
     {
@@ -37,8 +35,6 @@ const partnerLogos = {
 };
 
 const SecondEditionPartners = forwardRef<HTMLDivElement>((_, ref) => {
-  const { t } = useTranslation();
-
   return (
     <div
       ref={ref}
@@ -141,4 +137,3 @@ const SecondEditionPartners = forwardRef<HTMLDivElement>((_, ref) => {
 SecondEditionPartners.displayName = "SecondEditionPartners";
 
 export default SecondEditionPartners;
-
