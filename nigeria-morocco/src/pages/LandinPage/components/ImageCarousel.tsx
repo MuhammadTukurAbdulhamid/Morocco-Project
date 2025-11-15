@@ -96,7 +96,6 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Navigation Buttons */}
       {images.length > 1 && (
         <>
           <motion.button
