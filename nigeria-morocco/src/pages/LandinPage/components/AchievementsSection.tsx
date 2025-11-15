@@ -363,8 +363,27 @@ const AchievementsSection: React.FC = () => {
             src: "/achievements/visitation-3.jpeg",
             alt: "ONHYM Meeting",
             caption: getTranslation(
-              "visitationImage2Caption",
-              "H.E Uba Ahmadu Maigari, The Charge d’Affairs Mr. Adamu Salihu Zanuwa, The DG Automotive Design & Development Council’s Visit to Emove Company"
+              "visitationImage3Caption",
+              "H.E Uba Ahmadu Maigari, The Charge d'Affairs Mr. Adamu Salihu Zanuwa, The DG Automotive Design & Development Council's Visit to Emove Company",
+              "S.E. Uba Ahmadu Maigari, le chargé d'affaires M. Adamu Salihu Zanuwa, visite du directeur général du Conseil de conception et de développement automobile à la société Emove"
+            ),
+          },
+          {
+            src: "/achievements/visitation-4.jpeg",
+            alt: "FIMME Meeting",
+            caption: getTranslation(
+              "visitationImage4Caption",
+              "Honourable Minister Federal Republic of Nigeria His Excellency Uba Maigari Ahmadu, Charge d'Affairs Nigerian Embassy Rabat Mr. Adamu Salihu Zanuwa, Head of Chancery Nigerian Embassy, Federation of Metallurgical, Mechanical and Electrical Industries (FIMME) led by the President, Mr. Abdelhamid Souiri and Vice President Abdesalam Halouani",
+              "Ministre honoraire de la République fédérale du Nigeria Son Excellence Uba Maigari Ahmadu, chargé d'affaires de l'ambassade du Nigeria à Rabat M. Adamu Salihu Zanuwa, chef de chancellerie de l'ambassade du Nigeria, Fédération des industries métallurgiques, mécaniques et électriques (FIMME) dirigée par le président, M. Abdelhamid Souiri et le vice-président Abdesalam Halouani"
+            ),
+          },
+          {
+            src: "/achievements/visitation-5.jpeg",
+            alt: "MoU Signing Ceremony",
+            caption: getTranslation(
+              "visitationImage5Caption",
+              "MoU Signing - Maghreb Steel (Morocco) and Nigeria Steel Company Niger Extraction Ltd. signed an MoU to establish a scrap metal collection center in Niger State, Nigeria for exports to Morocco. It was witnessed by erstwhile The Hon. Minister of State Steel Development now Minister of State for Regional Development His Excellency Uba Ahmadu Maigari, The Charge d'Affairs Nigerian Embassy in Rabat Mr. Adamu Salisu Zanuwa, and the Head of Chancery and the directors from the Ministry of Steel Development Olusegun Temitope Peluola, Dr. Mrs. Florence Msheliza",
+              "Signature de MoU - Maghreb Steel (Maroc) et Nigeria Steel Company Niger Extraction Ltd. ont signé un MoU pour établir un centre de collecte de ferraille dans l'État de Niger, au Nigeria, pour les exportations vers le Maroc. Il a été témoigné par l'ancien ministre d'État au développement de l'acier, maintenant ministre d'État au développement régional, Son Excellence Uba Ahmadu Maigari, le chargé d'affaires de l'ambassade du Nigeria à Rabat M. Adamu Salisu Zanuwa, et le chef de chancellerie et les directeurs du ministère du développement de l'acier Olusegun Temitope Peluola, Dr. Mme Florence Msheliza"
             ),
           },
         ],

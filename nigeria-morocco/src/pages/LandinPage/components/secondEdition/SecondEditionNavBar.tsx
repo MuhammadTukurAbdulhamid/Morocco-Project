@@ -75,7 +75,7 @@ const SecondEditionNavBar: React.FC<Props> = ({ onRegister, onBook }) => {
         </a>
         <a
           className="text-[13px] lg:text-[14px] font-medium hover:text-primary transition whitespace-nowrap"
-          href="/"
+          href="/first-edition"
         >
           {getTranslation("firstEditionLink", "1st Edition", "1ère édition")}
         </a>
@@ -147,7 +147,7 @@ const SecondEditionNavBar: React.FC<Props> = ({ onRegister, onBook }) => {
           <a
             onClick={onClose}
             className="text-[14px] w-full text-center"
-            href="/"
+            href="/first-edition"
           >
             {getTranslation("firstEditionLink", "1st Edition", "1ère édition")}
           </a>

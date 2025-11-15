@@ -39,8 +39,8 @@ function App() {
             }}
           >
             <Routes>
-              <Route path="/" element={<LandinPage />} />
-              <Route path="/second-edition" element={<SecondEdition />} />
+              <Route path="/first-edition" element={<LandinPage />} />
+              <Route path="/" element={<SecondEdition />} />
               <Route path="/Register" element={<Register />} />
               <Route path="/Booking" element={<Booking />} />
               <Route path="/Invoice" element={<Invoice />} />

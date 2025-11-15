@@ -141,25 +141,11 @@ const NavBar: React.FC<Props> = ({
   return (
     <div
       key={`navbar-${i18n.language}`}
-      className="nav sticky top-0 z-30 py-8 px-5 md:px-20 lg:px-30 min-h-20 p-0 bg-white backdrop-blur-md shadow-md flex items-center justify-between"
+      className="nav sticky top-0 z-30 px-5 md:px-20 lg:px-30 min-h-20 p-0 bg-silver/90 backdrop-blur-md shadow-md flex items-center justify-between"
     >
-      <div className="flex items-center justify-center gap-2 whitespace-nowrap">
-        <img
-          src="https://flagcdn.com/w40/ng.png"
-          alt="Nigeria flag"
-          className="w-4 h-3 rounded-sm shadow-sm"
-        />
-
-        <h1 className="text-xl md:text-2xl font-semibold text-black flex items-center gap-2 drop-shadow">
-          Nigeria - Morocco
-        </h1>
-
-        <img
-          src="https://flagcdn.com/w40/ma.png"
-          alt="Morocco flag"
-          className="w-5 h-4 md:w-4 md:h-3 rounded-sm shadow-sm object-cover"
-        />
-      </div>
+      <h1 className="text-xl md:text-2xl font-bold text-primary drop-shadow">
+        🇳🇬 NIGERIA-MOROCCO 🇲🇦
+      </h1>
 
       <div className="hidden xl:flex items-center space-x-3 lg:space-x-4 xl:space-x-6 flex-wrap xl:flex-nowrap">
         <a

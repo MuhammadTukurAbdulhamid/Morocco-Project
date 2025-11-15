@@ -21,11 +21,11 @@ export default function LandinPage() {
   // const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleNavigateSecondEdition = () => {
-    navigate("/second-edition");
+    navigate("/");
   };
 
   const handleNavigateFirstEdition = () => {
-    navigate("/");
+    navigate("/first-edition");
   };
 
   return (
