@@ -254,11 +254,7 @@ const AchievementsSection: React.FC = () => {
             "Nigeria-Morocco Steel Day: To be hosted alternately in both countries to strengthen ties in the steel sector",
             "Journée de l'acier Nigeria-Maroc : À organiser alternativement dans les deux pays pour renforcer les liens dans le secteur de l'acier"
           ),
-          getTranslation(
-            "seaLaneMOU",
-            "Lagos–Casablanca Sea Lane: Agreement to pursue direct sea trade to reduce transit time and bypass intermediaries",
-            "Voie maritime Lagos-Casablanca : Accord pour poursuivre le commerce maritime direct afin de réduire le temps de transit et de contourner les intermédiaires"
-          ),
+
           getTranslation(
             "greenhouseProjectMOU",
             "Greenhouse Project: Nigeria presented a plan to repurpose abandoned vessels into greenhouse farms, seeking Moroccan collaboration",
