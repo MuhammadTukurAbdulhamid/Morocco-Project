@@ -209,7 +209,7 @@ const Modals: React.FC<Props> = ({
       >
         <div className="w-full" style={{ height: "600px" }}>
           <iframe
-            src="https://docs.google.com/document/d/e/2PACX-1vShoBS85TCE1c5uHsJFVDhTyoqJ0_8wpeYm4hSBOkEtCGNOSSkYikzbklJmpXzK96oUIevFcmSHp23y/pub?embedded=true"
+            src="https://docs.google.com/document/d/e/2PACX-1vSl7jkan2ZsllZ1RatqrngrtxyqElzVPX29r7-I7Dt-lmIoxmmdC7re9nGFat2mMh3dt-TKN3bM1CV1/pub?embedded=true"
             width="100%"
             height="100%"
             style={{ border: "none" }}

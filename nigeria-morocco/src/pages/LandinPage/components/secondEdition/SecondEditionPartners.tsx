@@ -7,27 +7,34 @@ const partnerLogos = {
       style: { maxHeight: 180, maxWidth: 420 },
     },
   ],
-  official: [
+  officialAgro: [
     {
       src: "fenagri.png",
       alt: "fenagri",
-      style: { maxHeight: 120, maxWidth: 380 },
+      style: { maxHeight: 150, maxWidth: 380 },
     },
   ],
-  partnership: [
+  officialAirTransport: [
+    { src: "ram.png", alt: "ram", style: { maxHeight: 150, maxWidth: 380 } },
+  ],
+  // partnership: [
+  //   {
+  //     src: "casa.png",
+  //     alt: "casa",
+  //     style: { maxHeight: 120, maxWidth: 380 },
+  //   },
+  // ],
+  institutional: [
+    { src: "fmiti.png", alt: "fmiti" },
+    { src: "MSD.jpg", alt: "MSD" },
+    { src: "NADDC.png", alt: "NADDC" },
     {
       src: "casa.png",
       alt: "casa",
       style: { maxHeight: 120, maxWidth: 380 },
     },
   ],
-  institutional: [
-    { src: "fmiti.png", alt: "fmiti" },
-    { src: "MSD.jpg", alt: "MSD" },
-    { src: "NADDC.png", alt: "NADDC" },
-  ],
   strategic: [
-    { src: "ram.png", alt: "ram" },
     { src: "HIESL.png", alt: "HIESL" },
     { src: "jed.jpg", alt: "jed" },
     { src: "farmcreed.jpg", alt: "farmcreed" },
@@ -58,21 +65,43 @@ const SecondEditionPartners = forwardRef<HTMLDivElement>((_, ref) => {
           />
         ))}
       </div>
-      <p className="uppercase text-red-700 font-semibold mt-2 mb-2 text-center text-sm md:text-base tracking-wider">
-        Official Partner Agro Industry
-      </p>
-      <div className="grid place-items-center justify-center items-center grid-cols-2 md:grid-cols-1 gap-2 w-full md:w-[70%] md:px-32 mt-2 mb-6">
-        {partnerLogos.official.map(({ src, alt, style }) => (
-          <img
-            key={src}
-            src={src}
-            alt={alt}
-            className="rounded-xl shadow-lg bg-white/90 p-3 border-2 border-blue-200 hover:scale-105 hover:shadow-xl transition-all duration-200 mx-auto block"
-            style={{ ...style, width: "100%", objectFit: "contain" }}
-          />
-        ))}
+      <div className="w-full md:w-[70%] md:px-32 mt-2 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 place-items-center">
+          <div className="w-full">
+            <p className="uppercase text-red-700 font-semibold mb-2 text-center text-sm md:text-base tracking-wider">
+              Official Partner Agro Industry
+            </p>
+            <div className="flex justify-center">
+              {partnerLogos.officialAgro.map(({ src, alt, style }) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt={alt}
+                  className="rounded-xl shadow-lg bg-white/90 p-3 border-2 border-blue-200 hover:scale-105 hover:shadow-xl transition-all duration-200 mx-auto block"
+                  style={{ ...style, width: "100%", objectFit: "contain" }}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="w-full">
+            <p className="uppercase text-red-700 font-semibold mb-2 text-center text-sm md:text-base tracking-wider">
+              Official Air Transport Sponsor
+            </p>
+            <div className="flex justify-center">
+              {partnerLogos.officialAirTransport.map(({ src, alt, style }) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt={alt}
+                  className="rounded-xl shadow-lg bg-white/90 p-3 border-2 border-blue-200 hover:scale-105 hover:shadow-xl transition-all duration-200 mx-auto block"
+                  style={{ ...style, width: "100%", objectFit: "contain" }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
-      <p className="uppercase text-blue-700 font-semibold mt-2 mb-2 text-center text-sm md:text-base tracking-wider">
+      {/* <p className="uppercase text-blue-700 font-semibold mt-2 mb-2 text-center text-sm md:text-base tracking-wider">
         In partnership with
       </p>
       <div className="grid place-items-center justify-center items-center grid-cols-2 md:grid-cols-1 gap-2 w-full md:w-[70%] md:px-32 mt-2 mb-6">
@@ -91,11 +120,11 @@ const SecondEditionPartners = forwardRef<HTMLDivElement>((_, ref) => {
             }}
           />
         ))}
-      </div>
+      </div> */}
       <p className="uppercase text-gray-700 font-semibold mt-2 mb-2 text-center text-sm md:text-base tracking-wider">
         Institutional Partners
       </p>
-      <div className="grid place-items-center justify-center items-center grid-cols-2 md:grid-cols-3 gap-5 w-auto md:px-32 mt-2 mb-6">
+      <div className="grid place-items-center justify-center items-center grid-cols-2 md:grid-cols-4 gap-5 w-auto md:px-32 mt-2 mb-6">
         {partnerLogos.institutional.map(({ src, alt }) => (
           <img
             key={src}
@@ -114,7 +143,7 @@ const SecondEditionPartners = forwardRef<HTMLDivElement>((_, ref) => {
       <p className="uppercase text-gray-700 font-semibold mt-2 mb-2 text-center text-sm md:text-base tracking-wider">
         Strategic Partners
       </p>
-      <div className="grid place-items-center justify-center items-center grid-cols-2 md:grid-cols-4 gap-5 w-auto md:px-32 mt-2">
+      <div className="grid place-items-center justify-center items-center grid-cols-2 md:grid-cols-3 gap-5 w-auto md:px-32 mt-2">
         {partnerLogos.strategic.map(({ src, alt }) => (
           <img
             key={src}
